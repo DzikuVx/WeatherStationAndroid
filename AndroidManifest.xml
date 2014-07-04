@@ -15,5 +15,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".SettingsActivity"
+                  android:theme="@style/MyAppTheme"
+                  android:label="@string/settings"/>
+        <activity android:name=".AboutActivity"
+                  android:theme="@style/MyAppTheme"
+                  android:label="@string/about"/>
     </application>
 </manifest>
