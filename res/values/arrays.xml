@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string-array name="subsection_array">
+		<item>Lorem ipsum</item>
+		<item>Lorem ipsum</item>
+		<item>Lorem ipsum</item>
+		<item>Lorem ipsum</item>
+		<item>Lorem ipsum</item>
+		<item>Lorem ipsum</item>
+		<item>Lorem ipsum</item>
+		<item>Lorem ipsum</item>
+		<item>Lorem ipsum</item>
+		<item>Lorem ipsum</item>
+		<item>Lorem ipsum</item>
+		<item>Lorem ipsum</item>
+	</string-array>
+</resources>

@@ -1,13 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-        >
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Hello World, MainActivity"
-            />
-</LinearLayout>
+<RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="25"
+            android:id="@+id/textView"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="12sp"
+            android:layout_marginLeft="12sp"
+            android:textSize="@dimen/display4"
+            android:textColor="@color/colorAccent"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="\u00B0C"
+            android:layout_marginLeft="2sp"
+            android:id="@+id/textView2"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/display4"
+            android:layout_alignBottom="@+id/textView"
+            android:layout_toRightOf="@+id/textView" android:layout_alignParentEnd="false"/>
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@id/textView"
+            android:layout_marginTop="12sp"
+            android:background="@color/colorMinor"
+            android:layout_alignParentLeft="true">
+        <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/listView"
+                android:layout_alignParentTop="true"
+                android:entries="@array/subsection_array"
+                android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>
