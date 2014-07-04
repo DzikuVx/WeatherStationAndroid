@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Based on indigo-->
+
+    <color name="transparent">#00000000</color>
+    <color name="textPrimary">#DE000000</color>
+    <color name="textSecondary">#8A000000</color>
+    <color name="textMinor">#42000000</color>
+
+    <color name="textLightPrimary">#DEFFFFFF</color>
+    <color name="textLightSecondary">#8AFFFFFF</color>
+    <color name="textLightMinor">#42FFFFFF</color>
+
+    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorSecondary">#c5cae9</color>
+    <color name="colorBold">#303f9f</color>
+    <color name="colorAccent">#ff4081</color>
+</resources>
