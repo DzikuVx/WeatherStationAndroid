@@ -1,24 +1,25 @@
 package pl.spychalski.WeatherStation;
 
-import android.app.ActionBar;
-import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
+import android.preference.PreferenceFragment;
 import android.view.MenuItem;
 
-public class SettingsActivity extends PreferenceActivity {
+public class SettingsActivity extends MyActionBarActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (android.os.Build.VERSION.SDK_INT >= 11) {
-            ActionBar actionBar = getActionBar();
-            if (actionBar != null) {
-                actionBar.setDisplayHomeAsUpEnabled(true);
-            }
-        }
+        getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();
+    }
 
-        addPreferencesFromResource(R.xml.preferences);
+    public static class SettingsFragment extends PreferenceFragment {
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            // Load the preferences from an XML resource
+            addPreferencesFromResource(R.xml.preferences);
+        }
     }
 
     @Override

@@ -1,6 +1,9 @@
 package pl.spychalski.WeatherStation;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.widget.Toast;
 
 public class MainActivity extends MyActionBarActivity {
 
@@ -19,7 +22,7 @@ public class MainActivity extends MyActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
-
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
 
         updateView();
     }
