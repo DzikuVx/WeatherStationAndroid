@@ -5,7 +5,7 @@
         android:showAsAction="withText|never"
         android:orderInCategory="1000" />
     <item android:id="@+id/menu_settings"
-          android:title="Settings"
+          android:title="@string/settings"
           android:icon="@drawable/ic_action_settings_lights"
           android:showAsAction="withText|never"
           android:orderInCategory="500" />

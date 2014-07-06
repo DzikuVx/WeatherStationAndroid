@@ -6,4 +6,13 @@
     <string name="update_interval">Update interval (minutes)</string>
     <string name="api_url">API Url</string>
     <string name="app_full_name">WeatherStation Android Client</string>
+    <string name="error_occured">Something went wrong</string>
+    <string name="data_fetched">Data fetched</string>
+    <string name="refresh">Refresh</string>
+
+    <string name="readoutName_Humidity">Humidity</string>
+    <string name="readoutName_Pressure">Pressure</string>
+    <string name="readoutName_Temperature">Temperature</string>
+    <string name="readoutName_WindSpeed">Wind speed</string>
+    <string name="readoutName_WindDirection">Wind direction</string>
 </resources>

@@ -14,14 +14,19 @@ abstract public class MyActionBarActivity extends Activity {
      */
     protected Boolean displayActionBarBack = true;
 
+    protected Boolean displayActionMenu = true;
+
     protected int menuFile = 0;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (menuFile == 0) {
-            menuFile = R.menu.fallback;
+
+        if (displayActionMenu) {
+            if (menuFile == 0) {
+                menuFile = R.menu.fallback;
+            }
+            getMenuInflater().inflate(menuFile, menu);
         }
-        getMenuInflater().inflate(menuFile, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

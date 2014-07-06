@@ -7,6 +7,9 @@ import android.view.MenuItem;
 public class SettingsActivity extends MyActionBarActivity {
 
     public void onCreate(Bundle savedInstanceState) {
+
+        super.displayActionMenu = false;
+
         super.onCreate(savedInstanceState);
 
         getFragmentManager().beginTransaction().replace(android.R.id.content, new SettingsFragment()).commit();

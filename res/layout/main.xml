@@ -7,8 +7,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="25"
-            android:id="@+id/textView"
+            android:text="--.-"
+            android:id="@+id/currentTemperature"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_marginTop="12sp"
@@ -24,23 +24,20 @@
             android:id="@+id/textView2"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/display4"
-            android:layout_alignBottom="@+id/textView"
-            android:layout_toRightOf="@+id/textView" android:layout_alignParentEnd="false"/>
+            android:layout_alignBottom="@+id/currentTemperature"
+            android:layout_toRightOf="@+id/currentTemperature" android:layout_alignParentEnd="false"/>
     <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_below="@id/textView"
+            android:layout_below="@id/currentTemperature"
             android:layout_marginTop="12sp"
             android:background="@color/colorMinor"
             android:layout_alignParentLeft="true">
         <ListView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/listView"
+                android:id="@+id/dataList"
                 android:layout_alignParentTop="true"
-                android:entries="@array/subsection_array"
                 android:layout_centerHorizontal="true"/>
     </RelativeLayout>
-
-
 </RelativeLayout>
