@@ -1,7 +1,6 @@
 package pl.spychalski.WeatherStation;
 
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -45,7 +44,7 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
         Long lCurrentTimestamp = System.currentTimeMillis() / 1000;
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        Long lDiff = Long.parseLong(sharedPref.getString("pref_update_interval", "60"), 10) * 60;
+        Long lDiff = Long.parseLong(sharedPref.getString(SettingsActivity.REQUEST_INTERVAL, "60"), 10) * 60;
 
         if (sLastReadout != null) {
             try {
@@ -168,7 +167,7 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
 
             Context context = getApplicationContext();
 
-            if (result.length() > 5 && context != null) {
+            if (result != null && result.length() > 5 && context != null) {
                 Toast.makeText(context, getString(R.string.data_fetched), Toast.LENGTH_LONG).show();
                 updateView();
             }
@@ -177,36 +176,15 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
         @Override
         protected String doInBackground(String... params) {
 
-            String response;
+            WeatherPoller poller = new WeatherPoller(MainActivity.this);
 
-            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-            String sUrl = sharedPref.getString("pref_api_url", "");
+            String response = poller.execute();
 
-            try {
-
-                HttpClient httpclient = new DefaultHttpClient();
-                HttpGet httpGet = new HttpGet(sUrl);
-                HttpResponse httpResponse = httpclient.execute(httpGet);
-                HttpEntity httpEntity = httpResponse.getEntity();
-
-                response = EntityUtils.toString(httpEntity);
-
-                //Save last response to shared storage
-                SharedPreferences weatherData = getSharedPreferences(MainActivity.SHARED_PREFERENCE_NAME, 0);
-                SharedPreferences.Editor editor = weatherData.edit();
-                editor.putString(MainActivity.LAST_READOUT_KEY, response);
-
-                //Put last readout time into storage
-                editor.putLong(MainActivity.LAST_READOUT_TIMESTAMP_KEY, System.currentTimeMillis() / 1000);
-                editor.commit();
-
-                return response;
-            } catch (Exception ex) {
-                ex.printStackTrace();
+            if (response == null) {
                 Toast.makeText(getApplicationContext(), getString(R.string.error_occured), Toast.LENGTH_LONG).show();
             }
 
-            return null;
+            return response;
         }
 
     }

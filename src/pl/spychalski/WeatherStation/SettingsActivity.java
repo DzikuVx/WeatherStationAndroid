@@ -6,6 +6,9 @@ import android.view.MenuItem;
 
 public class SettingsActivity extends MyActionBarActivity {
 
+    public static final String API_URL_KEY = "pref_api_url";
+    public static final String REQUEST_INTERVAL = "pref_update_interval";
+
     public void onCreate(Bundle savedInstanceState) {
 
         super.displayActionMenu = false;
