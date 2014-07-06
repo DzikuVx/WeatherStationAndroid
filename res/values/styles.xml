@@ -20,6 +20,7 @@
         <item name="android:homeAsUpIndicator">@drawable/ic_ab_back_holo_dark</item>
         <item name="android:actionOverflowButtonStyle">@style/OverFlow</item>
         <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:windowBackground">@color/white</item>
         <item name="android:textSize">@dimen/body</item>
     </style>
 

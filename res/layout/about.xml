@@ -5,19 +5,22 @@
                 android:layout_height="match_parent">
 
     <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/app_name"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/display2"
             android:id="@+id/currentTemperature" android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
-            android:layout_marginTop="32sp" android:textIsSelectable="false" android:textAlignment="center"/>
+            android:layout_marginTop="32sp" android:textIsSelectable="false"
+            android:gravity="center"/>
     <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Android Client"
-            android:id="@+id/textView2" android:layout_below="@+id/currentTemperature" android:layout_centerHorizontal="true"
+            android:id="@+id/textView2" android:layout_below="@+id/currentTemperature"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
             android:textSize="@dimen/headline"/>
 </RelativeLayout>

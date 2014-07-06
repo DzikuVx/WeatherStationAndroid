@@ -63,13 +63,13 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
                         entry.setValue(jData.getString(key));
                         entry.setUnit("%");
                     } else if (key.equals("Pressure")) {
-                        entry.setValue(Integer.toString(Integer.parseInt(jData.getString(key), 10)));
+                        entry.setValue(Integer.toString(Math.round(Float.parseFloat(jData.getString(key)))));
                         entry.setUnit("hPa");
                     } else if (key.equals("WindSpeed")) {
                         entry.setValue(jData.getString(key));
                         entry.setUnit("m/s");
                     } else if (key.equals("WindDirection")) {
-                        entry.setValue(jData.getString(key));
+                        entry.setValue(Integer.toString(Math.round(Float.parseFloat(jData.getString(key)))));
                         entry.setUnit("\u00B0");
                     } else {
                         continue;
