@@ -68,6 +68,23 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
                     } else if (key.equals("WindDirection")) {
                         entry.setValue(Integer.toString(Math.round(Float.parseFloat(jData.getString(key)))));
                         entry.setUnit("\u00B0");
+                    } else if (key.equals("TempMax")) {
+                        entry.setValue(jData.getString(key));
+                        entry.setUnit("\u00B0C");
+                    } else if (key.equals("TempMin")) {
+                        entry.setValue(jData.getString(key));
+                        entry.setUnit("\u00B0C");
+                    } else if (key.equals("Clouds")) {
+                        entry.setValue(jData.getString(key));
+                        entry.setUnit("%");
+                    } else if (key.equals("Rain") || key.equals("Snow")) {
+
+                        if (Float.parseFloat(jData.getString(key)) == 0) {
+                            continue;
+                        }
+
+                        entry.setValue(jData.getString(key));
+                        entry.setUnit("mm/h");
                     } else {
                         continue;
                     }

@@ -17,4 +17,9 @@
     <string name="readoutName_Temperature">Temperature</string>
     <string name="readoutName_WindSpeed">Wind speed</string>
     <string name="readoutName_WindDirection">Wind direction</string>
+    <string name="readoutName_TempMax">Max. Temperature</string>
+    <string name="readoutName_TempMin">Min. Temperature</string>
+    <string name="readoutName_Clouds">Clouds</string>
+    <string name="readoutName_Rain">Rain</string>
+    <string name="readoutName_Snow">Snow</string>
 </resources>
