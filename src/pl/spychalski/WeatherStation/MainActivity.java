@@ -98,7 +98,6 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
 
     TextView currentTemperature;
     ListView dataList;
-    Button button;
 
     /**
      * Called when the activity is first created.
@@ -119,9 +118,6 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
 
         currentTemperature = (TextView) findViewById(R.id.currentTemperature);
         dataList = (ListView) findViewById(R.id.dataList);
-
-        button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(this);
 
         updateView();
 
@@ -152,12 +148,6 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
     }
 
     public void onClick(View view) {
-
-        switch (view.getId()) {
-            case R.id.button:
-                new WeatherNotification(this).pushDailyNotification();
-                break;
-        }
 
     }
 
