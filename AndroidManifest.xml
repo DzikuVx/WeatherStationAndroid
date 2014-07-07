@@ -12,6 +12,9 @@
         <service
                 android:name=".WeatherPollerService"
                 android:exported="false"/>
+        <service
+                android:name=".WeatherNotificationService"
+                android:exported="false"/>
 
         <activity android:name="MainActivity"
                   android:theme="@style/MyAppTheme"

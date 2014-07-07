@@ -1,7 +1,6 @@
 package pl.spychalski.WeatherStation;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
+import android.app.*;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,6 +10,7 @@ import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 
 public class MainActivity extends MyActionBarActivity implements View.OnClickListener {
@@ -97,6 +98,7 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
 
     TextView currentTemperature;
     ListView dataList;
+    Button button;
 
     /**
      * Called when the activity is first created.
@@ -118,6 +120,9 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
         currentTemperature = (TextView) findViewById(R.id.currentTemperature);
         dataList = (ListView) findViewById(R.id.dataList);
 
+        button = (Button) findViewById(R.id.button);
+        button.setOnClickListener(this);
+
         updateView();
 
         /*
@@ -130,10 +135,30 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
         PendingIntent startWebServicePendingIntent = PendingIntent.getService(this, 0, startServiceIntent, 0);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC, System.currentTimeMillis(), lDiff * 60 * 1000, startWebServicePendingIntent);
+        alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis(), lDiff * 60 * 1000, startWebServicePendingIntent);
+
+        /*
+         * Register alarm service for morning weather notification
+         */
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 8);
+        calendar.set(Calendar.MINUTE, 0);
+
+        Intent notificationServiceIntent = new Intent(this, WeatherNotificationService.class);
+        PendingIntent notificationServicePendingIntent = PendingIntent.getService(this, 0, notificationServiceIntent, 0);
+
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, notificationServicePendingIntent);
     }
 
     public void onClick(View view) {
+
+        switch (view.getId()) {
+            case R.id.button:
+                new WeatherNotification(this).pushDailyNotification();
+                break;
+        }
+
     }
 
     private void getData() {

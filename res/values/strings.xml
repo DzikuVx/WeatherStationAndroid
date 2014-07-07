@@ -9,6 +9,8 @@
     <string name="error_occured">Something went wrong</string>
     <string name="data_fetched">Data fetched</string>
     <string name="refresh">Refresh</string>
+    <string name="notification_now">Now: </string>
+    <string name="notification_text">Open WeatherStation for details</string>
 
     <string name="readoutName_Humidity">Humidity</string>
     <string name="readoutName_Pressure">Pressure</string>
