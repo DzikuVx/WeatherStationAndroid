@@ -10,10 +10,7 @@ import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -26,10 +23,6 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
     public static final String SHARED_PREFERENCE_NAME = "weatherData";
     public static final String LAST_READOUT_KEY = "lastReadout";
     public static final String LAST_READOUT_TIMESTAMP_KEY = "lastReadoutTimestamp";
-
-    private static int getStringIdentifier(Context context, String name) {
-        return context.getResources().getIdentifier(name, "string", context.getPackageName());
-    }
 
     private void updateView() {
 
@@ -48,7 +41,36 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
             try {
                 JSONObject jData = new JSONObject(sLastReadout);
 
-                currentTemperature.setText(jData.getString("Temperature"));
+                currentTemperature.setText(jData.getString("Temperature") + "\u00B0C");
+                maxTemperature.setText(jData.getString("TempMax") + "\u00B0C");
+                minTemperature.setText(jData.getString("TempMin") + "\u00B0C");
+                currentWeatherIcon.setImageResource(getImageIdentifier(this, "icon_" + jData.getString("WeatherIcon")));
+                currentHumidity.setText(jData.getString("Humidity") + "%");
+                currentPressure.setText(jData.getString("Pressure") + "hPa");
+
+                windSpeed.setText(jData.getString("WindSpeed") + "m/s");
+                windDirection.setText(Integer.toString(Math.round(Float.parseFloat(jData.getString("WindDirection")))) + "°");
+                cloudCoverage.setText(jData.getString("Clouds") + "%");
+
+                Float value = Float.parseFloat(jData.getString("Rain"));
+                if (value > 0) {
+                    rainValue.setText(Integer.toString(Math.round(value)) + "mm/h");
+                    rainValue.setVisibility(TextView.VISIBLE);
+                    rainHeader.setVisibility(TextView.VISIBLE);
+                } else {
+                    rainValue.setVisibility(TextView.GONE);
+                    rainHeader.setVisibility(TextView.GONE);
+                }
+
+                value = Float.parseFloat(jData.getString("Snow"));
+                if (value > 0) {
+                    snowValue.setText(Integer.toString(Math.round(value)) + "mm/h");
+                    snowValue.setVisibility(TextView.VISIBLE);
+                    snowHeader.setVisibility(TextView.VISIBLE);
+                } else {
+                    snowValue.setVisibility(TextView.GONE);
+                    snowHeader.setVisibility(TextView.GONE);
+                }
 
                 Iterator<?> keys = jData.keys();
 
@@ -114,6 +136,20 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
     }
 
     TextView currentTemperature;
+    TextView maxTemperature;
+    TextView minTemperature;
+    ImageView currentWeatherIcon;
+    TextView currentHumidity;
+    TextView currentPressure;
+    TextView windSpeed;
+    TextView windDirection;
+    TextView cloudCoverage;
+
+    TextView rainValue;
+    TextView rainHeader;
+    TextView snowValue;
+    TextView snowHeader;
+
     ListView dataList;
 
     /**
@@ -129,11 +165,27 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.main_v2);
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
 
         currentTemperature = (TextView) findViewById(R.id.currentTemperature);
+        maxTemperature = (TextView) findViewById(R.id.maxTemperature);
+        minTemperature = (TextView) findViewById(R.id.minTemperature);
+        currentWeatherIcon = (ImageView) findViewById(R.id.currentWeatherIcon);
+        currentHumidity = (TextView) findViewById(R.id.currentHumidity);
+        currentPressure = (TextView) findViewById(R.id.currentPressure);
+
+        windSpeed = (TextView) findViewById(R.id.windSpeed);
+        windDirection = (TextView) findViewById(R.id.windDirection);
+        cloudCoverage = (TextView) findViewById(R.id.cloudCoverage);
+
+        rainHeader = (TextView) findViewById(R.id.rainHeader);
+        rainValue = (TextView) findViewById(R.id.rainValue);
+
+        snowHeader = (TextView) findViewById(R.id.snowHeader);
+        snowValue = (TextView) findViewById(R.id.snowValue);
+
         dataList = (ListView) findViewById(R.id.dataList);
 
         updateView();
@@ -220,9 +272,10 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
             WeatherPoller poller = new WeatherPoller(MainActivity.this);
 
             String response = poller.execute();
+            Context context = getApplicationContext();
 
-            if (response == null) {
-                Toast.makeText(getApplicationContext(), getString(R.string.error_occured), Toast.LENGTH_LONG).show();
+            if (context != null && response == null) {
+                Toast.makeText(context, getString(R.string.error_occured), Toast.LENGTH_LONG).show();
             }
 
             return response;

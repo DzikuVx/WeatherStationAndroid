@@ -2,6 +2,7 @@ package pl.spychalski.WeatherStation;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,6 +18,14 @@ abstract public class MyActionBarActivity extends Activity {
     protected Boolean displayActionMenu = true;
 
     protected int menuFile = 0;
+
+    protected static int getImageIdentifier(Context context, String name) {
+        return context.getResources().getIdentifier(name, "drawable", context.getPackageName());
+    }
+
+    protected static int getStringIdentifier(Context context, String name) {
+        return context.getResources().getIdentifier(name, "string", context.getPackageName());
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

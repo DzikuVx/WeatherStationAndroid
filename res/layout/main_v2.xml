@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true" android:id="@+id/relativeLayout">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/empty_temperature"
+                android:textSize="@dimen/display2"
+                android:textColor="@color/textLightPrimary"
+                android:id="@+id/currentTemperature"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="12sp"
+                android:layout_marginTop="12sp"/>
+
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/currentWeatherIcon"
+                android:contentDescription="@string/current_weather_icon"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/icon_01d" android:layout_marginTop="12sp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/empty_temperature"
+                android:layout_marginLeft="12sp"
+                android:textSize="@dimen/subhead"
+                android:textColor="@color/textLightSecondary"
+                android:id="@+id/maxTemperature" android:layout_alignTop="@+id/currentTemperature"
+                android:layout_toRightOf="@+id/currentTemperature" android:layout_marginTop="6sp"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/empty_temperature"
+                android:textSize="@dimen/subhead"
+                android:layout_marginLeft="12sp"
+                android:textColor="@color/textLightSecondary"
+                android:id="@+id/minTemperature" android:layout_alignBottom="@+id/currentTemperature"
+                android:layout_toRightOf="@+id/currentTemperature" android:layout_marginBottom="6sp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/humidity_label"
+                android:layout_marginTop="6sp"
+                android:textSize="@dimen/subhead"
+                android:textColor="@color/textLightSecondary"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="12sp"
+                android:id="@+id/humidityLabel" android:layout_below="@+id/currentTemperature"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="--%"
+                android:id="@+id/currentHumidity"
+                android:textSize="@dimen/subhead"
+                android:textColor="@color/textLightPrimary"
+                android:layout_marginLeft="4sp"
+                android:layout_alignBaseline="@id/humidityLabel" android:layout_toRightOf="@+id/humidityLabel"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/pressure_label"
+                android:textSize="@dimen/subhead"
+                android:textColor="@color/textLightSecondary"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="12sp"
+                android:id="@+id/pressureLabel" android:layout_below="@+id/humidityLabel"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="--hPa"
+                android:id="@+id/currentPressure"
+                android:textSize="@dimen/subhead"
+                android:textColor="@color/textLightPrimary"
+                android:layout_marginLeft="4sp"
+                android:layout_alignBaseline="@id/pressureLabel" android:layout_toRightOf="@+id/pressureLabel"/>
+        <Space
+                android:layout_width="20sp"
+                android:layout_below="@+id/pressureLabel"
+                android:layout_height="12sp"/>
+
+
+    </RelativeLayout>
+
+    <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dataTable"
+            android:layout_below="@+id/relativeLayout" android:layout_marginTop="8sp">
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:text="@string/wind"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/subhead"
+                    android:textColor="@color/colorSecondary"
+                    android:gravity="center"/>
+            <TextView
+                    android:text="@string/clouds"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="@dimen/subhead"
+                    android:textColor="@color/colorSecondary"
+                    android:gravity="center"/>
+            <TextView
+                    android:text="@string/rain"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/rainHeader"
+                    android:textSize="@dimen/subhead"
+                    android:textColor="@color/colorSecondary"
+                    android:gravity="center"/>
+            <TextView
+                    android:text="@string/snow"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/snowHeader"
+                    android:textSize="@dimen/subhead"
+                    android:textColor="@color/colorSecondary"
+                    android:gravity="center"/>
+        </TableRow>
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    >
+                <TextView
+                        android:id="@+id/windSpeed"
+                        android:layout_weight="1"
+                        android:text="--m/s"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/subhead"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"/>
+                <TextView
+                        android:text="--%"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="@dimen/subhead"
+                        android:id="@+id/windDirection"
+                        android:layout_weight="1"
+                        android:gravity="center"/>
+            </LinearLayout>
+
+            <TextView
+                    android:text="--%"
+                    android:id="@+id/cloudCoverage"
+                    android:layout_weight="1"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="@dimen/subhead"
+                    android:gravity="center"/>
+
+            <TextView
+                    android:text="--mm/h"
+                    android:id="@+id/rainValue"
+                    android:layout_weight="1"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="@dimen/subhead"
+                    android:gravity="center"/>
+
+            <TextView
+                    android:text="--mm/h"
+                    android:id="@+id/snowValue"
+                    android:layout_weight="1"
+                    android:textColor="@color/textPrimary"
+                    android:textSize="@dimen/subhead"
+                    android:gravity="center"/>
+
+
+        </TableRow>
+    </TableLayout>
+
+    <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/dataList"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/dataTable" android:headerDividersEnabled="true" android:layout_marginTop="8sp"/>
+
+</RelativeLayout>

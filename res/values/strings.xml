@@ -11,6 +11,8 @@
     <string name="refresh">Refresh</string>
     <string name="notification_now">Now: </string>
     <string name="notification_text">Open WeatherStation for details</string>
+    <string name="humidity_label">Humidity: </string>
+    <string name="pressure_label">Pressure: </string>
 
     <string name="readoutName_Humidity">Humidity</string>
     <string name="readoutName_Pressure">Pressure</string>
@@ -22,4 +24,10 @@
     <string name="readoutName_Clouds">Clouds</string>
     <string name="readoutName_Rain">Rain</string>
     <string name="readoutName_Snow">Snow</string>
+    <string name="snow">Snow</string>
+    <string name="rain">Rain</string>
+    <string name="clouds">Clouds</string>
+    <string name="wind">Wind</string>
+    <string name="current_weather_icon">Current weather icon</string>
+    <string name="empty_temperature">--.-\u00B0C</string>
 </resources>
