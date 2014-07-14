@@ -7,10 +7,12 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.*;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -44,7 +46,7 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
                 currentTemperature.setText(jData.getString("Temperature") + "\u00B0C");
                 maxTemperature.setText(jData.getString("TempMax") + "\u00B0C");
                 minTemperature.setText(jData.getString("TempMin") + "\u00B0C");
-                currentWeatherIcon.setImageResource(getImageIdentifier(this, "icon_" + jData.getString("WeatherIcon")));
+                currentWeatherIcon.setImageResource(Utils.getImageIdentifier(this, "icon_" + jData.getString("WeatherIcon")));
                 currentHumidity.setText(jData.getString("Humidity") + "%");
                 currentPressure.setText(jData.getString("Pressure") + "hPa");
 
@@ -72,6 +74,43 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
                     snowHeader.setVisibility(TextView.GONE);
                 }
 
+                JSONArray jForecastData = jData.getJSONArray("Forecast");
+                JSONObject jForecast;
+
+                ArrayList<DayForecastSimple> forecastSimples = new ArrayList<DayForecastSimple>();
+
+                for (int i = 0; i < jForecastData.length(); i++) {
+                    jForecast = (JSONObject) jForecastData.get(i);
+
+                    DayForecastSimple day = new DayForecastSimple();
+
+                    day.setDate(jForecast.getString("Date"));
+                    day.setDayOfWeek(jForecast.getString("WeekDay"));
+                    day.setTempMax(jForecast.getString("TempMax"));
+                    day.setTempMin(jForecast.getString("TempMin"));
+                    day.setWeatherIcon(jForecast.getString("WeatherIcon"));
+                    day.setTempDay(jForecast.getString("TempDay"));
+                    day.setTempNight(jForecast.getString("TempNight"));
+
+                    forecastSimples.add(day);
+                }
+
+                ForecastListAdapter adapter = new ForecastListAdapter(this, forecastSimples);
+                dataList.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+
+//                Toast.makeText(this, "Done", Toast.LENGTH_LONG).show();
+
+//                Iterator<?> keys = jForecastData.keys();
+
+//                while (keys.hasNext()) {
+//                    String key = (String) keys.next();
+
+//                    jForecast = (JSONObject) jForecastData.getJSONObject(key);
+//
+//                }
+
+                /*
                 Iterator<?> keys = jData.keys();
 
                 while (keys.hasNext()) {
@@ -121,7 +160,10 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
 
                 adapter.notifyDataSetChanged();
 
+                */
+
             } catch (JSONException e) {
+                Log.e("Error", "failed to build", e);
                 e.printStackTrace();
             }
 
@@ -200,19 +242,21 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
         PendingIntent startWebServicePendingIntent = PendingIntent.getService(this, 0, startServiceIntent, 0);
 
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.cancel(startWebServicePendingIntent);
         alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis(), lDiff * 60 * 1000, startWebServicePendingIntent);
 
         /*
          * Register alarm service for morning weather notification
          */
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.setTimeInMillis(System.currentTimeMillis() + 86400000);
         calendar.set(Calendar.HOUR_OF_DAY, 8);
         calendar.set(Calendar.MINUTE, 0);
 
         Intent notificationServiceIntent = new Intent(this, WeatherNotificationService.class);
         PendingIntent notificationServicePendingIntent = PendingIntent.getService(this, 0, notificationServiceIntent, 0);
 
+        alarmManager.cancel(notificationServicePendingIntent);
         alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, notificationServicePendingIntent);
     }
 

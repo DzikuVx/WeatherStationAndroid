@@ -21,7 +21,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="\u00B0C"
             android:layout_marginLeft="2sp"
-            android:id="@+id/textView2"
+            android:id="@+id/maxTemperature"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/display4"
             android:layout_alignBottom="@+id/currentTemperature"

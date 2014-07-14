@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Android Client"
-            android:id="@+id/textView2" android:layout_below="@+id/currentTemperature"
+            android:id="@+id/maxTemperature" android:layout_below="@+id/currentTemperature"
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:textSize="@dimen/headline"/>
