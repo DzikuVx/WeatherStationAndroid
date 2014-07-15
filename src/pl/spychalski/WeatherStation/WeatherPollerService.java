@@ -13,7 +13,6 @@ public class WeatherPollerService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         WeatherPoller poller = new WeatherPoller(this);
         poller.execute();
-        Log.d("Info", "Poller service executed");
     }
 
 }

@@ -5,16 +5,15 @@
                 android:layout_height="match_parent">
 
     <ImageView
-            android:layout_width="24pt"
+            android:layout_width="64dp"
             android:contentDescription="Weather icon"
-            android:layout_height="24pt"
+            android:layout_height="64dp"
             android:id="@+id/weatherIcon"
             android:scaleX="1"
             android:scaleY="1"
-            android:background="@color/colorSecondary"
-            android:src="@drawable/icon_01d"
-            android:layout_marginTop="4sp"
-            android:layout_marginLeft="4sp"
+            android:src="@drawable/icon_01d_i"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"/>
     <TextView
@@ -25,8 +24,8 @@
             android:textSize="@dimen/headline"
             android:textColor="@color/textSecondary"
             android:id="@+id/dayOfWeek"
-            android:layout_marginLeft="24sp"
-            android:layout_marginTop="16sp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="24dp"
             android:layout_toRightOf="@+id/weatherIcon"/>
 
     <TextView
@@ -34,11 +33,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/empty_temperature"
-        android:textSize="@dimen/headline"
+        android:textSize="@dimen/display1"
         android:id="@+id/temperature"
         android:textColor="@color/textSecondary"
-        android:layout_toLeftOf="@id/maxTemperature"
-        android:layout_alignBaseline="@+id/dayOfWeek" />
+        android:layout_marginTop="16dp"
+        android:layout_toLeftOf="@id/maxTemperature" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -46,11 +45,11 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/empty_temperature"
         android:id="@+id/maxTemperature"
-        android:layout_marginLeft="12sp"
+        android:layout_marginLeft="8dp"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="48sp"
+        android:layout_marginRight="48dp"
         android:textColor="@color/textSecondary"
-        android:layout_marginTop="4sp"
+        android:layout_marginTop="18dp"
         android:layout_alignParentRight="true"/>
 
     <TextView
@@ -61,11 +60,12 @@
         android:textColor="@color/textSecondary"
         android:id="@+id/minTemperature"
         android:layout_alignLeft="@id/maxTemperature"
+        android:layout_marginBottom="14dp"
         android:layout_alignBottom="@+id/weatherIcon"/>
 
     <Space
-        android:layout_width="20px"
-        android:layout_height="4sp"
+        android:layout_width="fill_parent"
+        android:layout_height="8dp"
         android:layout_below="@+id/weatherIcon"
         android:layout_alignParentLeft="true" />
 </RelativeLayout>

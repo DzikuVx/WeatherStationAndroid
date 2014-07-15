@@ -1,10 +1,10 @@
 package pl.spychalski.WeatherStation;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.Toast;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -20,6 +20,7 @@ public class WeatherPoller {
         this.context = context;
     }
 
+    @SuppressLint("CommitPrefEdits")
     public String execute() {
 
         String response;
@@ -44,6 +45,8 @@ public class WeatherPoller {
             //Put last readout time into storage
             editor.putLong(MainActivity.LAST_READOUT_TIMESTAMP_KEY, System.currentTimeMillis() / 1000);
             editor.commit();
+
+            Log.d("Info", "Poller service executed successfully");
 
             return response;
         } catch (Exception ex) {

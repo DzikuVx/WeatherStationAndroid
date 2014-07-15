@@ -66,7 +66,7 @@ public class ForecastListAdapter extends BaseAdapter {
         viewHolder.maxTemperature.setText(Integer.toString(current.getIntTempMax()) + "\u00B0C");
         viewHolder.minTemperature.setText(Integer.toString(current.getIntTempMin()) + "\u00B0C");
         viewHolder.temperature.setText(Integer.toString(current.getIntTempDay()) + "\u00B0C");
-        viewHolder.weatherIcon.setImageResource(current.getWeatherIconResource(ctx));
+        viewHolder.weatherIcon.setImageResource(current.getInvertedWeatherIconResource(ctx));
         viewHolder.dayOfWeek.setText(current.getTranslatedDayOfWeek(ctx));
 
         return convertView;

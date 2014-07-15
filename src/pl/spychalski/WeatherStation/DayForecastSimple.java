@@ -26,6 +26,10 @@ public class DayForecastSimple implements Serializable {
         return Utils.getImageIdentifier(context, "icon_" + WeatherIcon);
     }
 
+    public int getInvertedWeatherIconResource(Context context) {
+        return Utils.getImageIdentifier(context, "icon_" + WeatherIcon + "_i");
+    }
+
     public String getTranslatedDayOfWeek(Context context) {
         return context.getString(Utils.getStringIdentifier(context, "dayOfWeek_" + DayOfWeek));
     }
