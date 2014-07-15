@@ -12,7 +12,11 @@ public class WeatherPollerService extends IntentService {
 
     protected void onHandleIntent(Intent intent) {
         WeatherPoller poller = new WeatherPoller(this);
-        poller.execute();
+        try {
+            poller.execute();
+        } catch (NoNetworkConnection e) {
+            Log.i("Network", "No network connection");
+        }
     }
 
 }

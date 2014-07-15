@@ -21,7 +21,11 @@ public class WeatherPoller {
     }
 
     @SuppressLint("CommitPrefEdits")
-    public String execute() {
+    public String execute() throws NoNetworkConnection {
+
+        if (!Utils.isNetworkAvailable(context)) {
+            throw new NoNetworkConnection();
+        }
 
         String response;
 

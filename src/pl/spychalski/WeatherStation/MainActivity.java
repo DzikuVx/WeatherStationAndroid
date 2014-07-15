@@ -313,13 +313,21 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
         @Override
         protected String doInBackground(String... params) {
 
+            String response = null;
+
+            Context context = getApplicationContext();
             WeatherPoller poller = new WeatherPoller(MainActivity.this);
 
-            String response = poller.execute();
-            Context context = getApplicationContext();
+            try {
 
-            if (context != null && response == null) {
-                Toast.makeText(context, getString(R.string.error_occured), Toast.LENGTH_LONG).show();
+                response = poller.execute();
+
+                if (context != null && response == null) {
+                    Toast.makeText(context, getString(R.string.error_occured), Toast.LENGTH_LONG).show();
+                }
+
+            } catch (NoNetworkConnection e) {
+                Log.i("Network", "No network connection");
             }
 
             return response;
