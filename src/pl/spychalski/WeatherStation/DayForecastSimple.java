@@ -6,6 +6,8 @@ import java.io.Serializable;
 
 public class DayForecastSimple implements Serializable {
 
+    private static final long serialVersionUID = 547998742264L;
+
     String WeatherIcon;
     String TempMax;
     String TempMin;
@@ -13,6 +15,78 @@ public class DayForecastSimple implements Serializable {
     String DayOfWeek;
     String TempDay;
     String TempNight;
+    String WeatherCode;
+    String Clouds;
+    String Humidity;
+    String Pressure;
+    String WindSpeed;
+    String WindDirection;
+    String Rain;
+    String Snow;
+
+    public String getWeatherCode() {
+        return WeatherCode;
+    }
+
+    public void setWeatherCode(String weatherCode) {
+        WeatherCode = weatherCode;
+    }
+
+    public String getClouds() {
+        return Clouds;
+    }
+
+    public void setClouds(String clouds) {
+        Clouds = clouds;
+    }
+
+    public String getHumidity() {
+        return Humidity;
+    }
+
+    public void setHumidity(String humidity) {
+        Humidity = humidity;
+    }
+
+    public String getPressure() {
+        return Pressure;
+    }
+
+    public void setPressure(String pressure) {
+        Pressure = pressure;
+    }
+
+    public String getWindSpeed() {
+        return WindSpeed;
+    }
+
+    public void setWindSpeed(String windSpeed) {
+        WindSpeed = windSpeed;
+    }
+
+    public String getWindDirection() {
+        return WindDirection;
+    }
+
+    public void setWindDirection(String windDirection) {
+        WindDirection = windDirection;
+    }
+
+    public String getRain() {
+        return Rain;
+    }
+
+    public void setRain(String rain) {
+        Rain = rain;
+    }
+
+    public String getSnow() {
+        return Snow;
+    }
+
+    public void setSnow(String snow) {
+        Snow = snow;
+    }
 
     public DayForecastSimple() {
 
@@ -101,4 +175,5 @@ public class DayForecastSimple implements Serializable {
     public void setTempNight(String tempNight) {
         TempNight = tempNight;
     }
+
 }

@@ -28,6 +28,18 @@
             android:layout_marginTop="24dp"
             android:layout_toRightOf="@+id/weatherIcon"/>
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageButton"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:src="@drawable/ic_action_send"
+        android:background="@color/colorAccent"
+        android:layout_marginTop="24dp"
+        android:layout_alignParentEnd="true"
+        android:visibility="invisible" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -47,10 +59,10 @@
         android:id="@+id/maxTemperature"
         android:layout_marginLeft="8dp"
         android:layout_alignParentTop="true"
-        android:layout_marginRight="48dp"
+        android:layout_marginRight="24dp"
         android:textColor="@color/textSecondary"
         android:layout_marginTop="18dp"
-        android:layout_alignParentRight="true"/>
+        android:layout_toLeftOf="@id/imageButton"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -68,4 +80,5 @@
         android:layout_height="8dp"
         android:layout_below="@+id/weatherIcon"
         android:layout_alignParentLeft="true" />
+
 </RelativeLayout>

@@ -38,4 +38,6 @@
     <string name="dayOfWeek_4">Pt.</string>
     <string name="dayOfWeek_5">Sob.</string>
     <string name="dayOfWeek_6">Niedz.</string>
+
+    <string name="forecast">Prognoza</string>
 </resources>

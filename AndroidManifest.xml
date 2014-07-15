@@ -31,8 +31,13 @@
         <activity android:name=".SettingsActivity"
                   android:theme="@style/MyAppTheme"
                   android:label="@string/settings"/>
+
         <activity android:name=".AboutActivity"
                   android:theme="@style/MyAppTheme"
                   android:label="@string/about"/>
+
+        <activity android:name=".ForecastActivity"
+            android:theme="@style/MyAppTheme"
+            android:label="@string/forecast" />
     </application>
 </manifest>

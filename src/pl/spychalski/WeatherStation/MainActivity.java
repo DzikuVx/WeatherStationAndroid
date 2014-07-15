@@ -30,8 +30,6 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
         SharedPreferences weatherData = getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
         String sLastReadout = weatherData.getString(LAST_READOUT_KEY, null);
 
-        ArrayList<ReadoutValue> values = new ArrayList<ReadoutValue>();
-
         Long lLastReadoutTimestamp = weatherData.getLong(LAST_READOUT_TIMESTAMP_KEY, 0);
         Long lCurrentTimestamp = System.currentTimeMillis() / 1000;
 
@@ -90,6 +88,15 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
                     day.setWeatherIcon(jForecast.getString("WeatherIcon"));
                     day.setTempDay(jForecast.getString("TempDay"));
                     day.setTempNight(jForecast.getString("TempNight"));
+
+                    day.setWeatherCode(jForecast.getString("WeatherCode"));
+                    day.setClouds(jForecast.getString("Clouds"));
+                    day.setSnow(jForecast.getString("Snow"));
+                    day.setRain(jForecast.getString("Rain"));
+                    day.setPressure(jForecast.getString("Pressure"));
+                    day.setHumidity(jForecast.getString("Humidity"));
+                    day.setWindSpeed(jForecast.getString("WindSpeed"));
+                    day.setWindDirection(jForecast.getString("WindDirection"));
 
                     forecastSimples.add(day);
                 }
