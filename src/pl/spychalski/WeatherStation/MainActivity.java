@@ -18,7 +18,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Iterator;
 
 public class MainActivity extends MyActionBarActivity implements View.OnClickListener {
 
@@ -207,7 +206,7 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_v2);
+        setContentView(R.layout.main);
 
         PreferenceManager.setDefaultValues(this, R.xml.preferences, true);
 
