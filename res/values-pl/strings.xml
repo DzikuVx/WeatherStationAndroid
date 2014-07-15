@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Pogoda w Szczecinie</string>
+    <string name="about">O aplikacji</string>
+    <string name="settings">Ustawienia</string>
+    <string name="update_interval">Częstotliwość odświeżania (minuty)</string>
+    <string name="api_url">Adres API</string>
+    <string name="app_full_name">Pogoda w Szczecinie</string>
+    <string name="error_occured">Chyba coś się nie udało...</string>
+    <string name="data_fetched">Pobrano dane</string>
+    <string name="refresh">Odśwież</string>
+    <string name="notification_now">Teraz: </string>
+    <string name="notification_text">Kliknij aby zobaczyć szczegóły</string>
+    <string name="humidity_label">Wilgotność: </string>
+    <string name="pressure_label">Ciśnienie: </string>
+
+    <string name="readoutName_Humidity">Wilgotność</string>
+    <string name="readoutName_Pressure">Ciśnienie</string>
+    <string name="readoutName_Temperature">Temperatura</string>
+    <string name="readoutName_WindSpeed">Szybkość wiatru</string>
+    <string name="readoutName_WindDirection">Kierunek wiatru</string>
+    <string name="readoutName_TempMax">Temperatura maksymalna</string>
+    <string name="readoutName_TempMin">Temperatura minimalna</string>
+    <string name="readoutName_Clouds">Zachmurzenie</string>
+    <string name="readoutName_Rain">Deszcz</string>
+    <string name="readoutName_Snow">Śnieg</string>
+    <string name="snow">Śnieg</string>
+    <string name="rain">Deszcz</string>
+    <string name="clouds">Zarzmurzenie</string>
+    <string name="wind">Wiatr</string>
+    <string name="current_weather_icon">Ikona pogody</string>
+    <string name="empty_temperature">--.-\u00B0C</string>
+
+    <string name="dayOfWeek_0">Pon.</string>
+    <string name="dayOfWeek_1">Wt.</string>
+    <string name="dayOfWeek_2">Śr.</string>
+    <string name="dayOfWeek_3">Czw.</string>
+    <string name="dayOfWeek_4">Pt.</string>
+    <string name="dayOfWeek_5">Sob.</string>
+    <string name="dayOfWeek_6">Niedz.</string>
+</resources>

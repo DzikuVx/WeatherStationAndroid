@@ -257,7 +257,7 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
         PendingIntent notificationServicePendingIntent = PendingIntent.getService(this, 0, notificationServiceIntent, 0);
 
         alarmManager.cancel(notificationServicePendingIntent);
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, notificationServicePendingIntent);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 28800000, notificationServicePendingIntent);
     }
 
     public void onClick(View view) {
