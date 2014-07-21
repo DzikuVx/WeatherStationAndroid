@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,8 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
     public static final String SHARED_PREFERENCE_NAME = "weatherData";
     public static final String LAST_READOUT_KEY = "lastReadout";
     public static final String LAST_READOUT_TIMESTAMP_KEY = "lastReadoutTimestamp";
+
+    public static final String DEBUG_TAG = "Debug";
 
     private void updateView() {
 
@@ -200,6 +203,8 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
 
     ListView dataList;
 
+    SwipeRefreshLayout swipeLayout;
+
     /**
      * Called when the activity is first created.
      */
@@ -235,6 +240,34 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
         snowValue = (TextView) findViewById(R.id.snowValue);
 
         dataList = (ListView) findViewById(R.id.dataList);
+
+        swipeLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefresh);
+        swipeLayout.setColorSchemeResources(R.color.accent600, R.color.accent400, R.color.accent200, R.color.accent100);
+
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getData();
+            }
+        });
+
+        /**
+         * Build manual scroll listener to enable SwipeRefreshLayout and ListView
+         */
+        dataList.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                int topRowVerticalPosition =
+                        (dataList == null || dataList.getChildCount() == 0) ?
+                                0 : dataList.getChildAt(0).getTop();
+                swipeLayout.setEnabled(topRowVerticalPosition >= 0);
+            }
+        });
 
         updateView();
 
@@ -314,6 +347,9 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
                 Toast.makeText(context, getString(R.string.data_fetched), Toast.LENGTH_LONG).show();
                 updateView();
             }
+
+            swipeLayout.setRefreshing(false);
+
         }
 
         @Override

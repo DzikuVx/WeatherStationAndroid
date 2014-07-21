@@ -19,4 +19,11 @@
     <color name="colorMinor">#e8eaf6</color>
     <color name="colorBold">#303f9f</color>
     <color name="colorAccent">#ff4081</color>
+
+    <color name="accent100">#f8bbd0</color>
+    <color name="accent200">#f48fb1</color>
+    <color name="accent400">#ec407a</color>
+    <color name="accent600">#d81b60</color>
+    <color name="accent800">#ad1457</color>
+
 </resources>
