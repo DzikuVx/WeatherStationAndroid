@@ -31,12 +31,11 @@ public class WeatherNotification {
 
                 NotificationCompat.Builder notification = new NotificationCompat.Builder(context);
 
-                notification.setSmallIcon(R.drawable.ic_launcher);
-
                 JSONObject jData = new JSONObject(sLastReadout);
 
-                notification.setContentTitle(context.getString(R.string.notification_now) + jData.getString("Temperature") + "\u00B0C");
+                notification.setContentTitle(context.getString(R.string.notification_now) + " " + jData.getString("Temperature") + "\u00B0C " + context.getString(R.string.notification_junction) + " " + jData.getString("Pressure") + "hPa");
                 notification.setContentText(context.getString(R.string.notification_text));
+                notification.setSmallIcon(Utils.getImageIdentifier(context, "icon_" + jData.getString("WeatherIcon")));
 
                 Intent intent = new Intent(context, MainActivity.class);
 

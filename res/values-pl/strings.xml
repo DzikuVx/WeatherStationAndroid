@@ -11,6 +11,7 @@
     <string name="refresh">Odśwież</string>
     <string name="notification_now">Teraz: </string>
     <string name="notification_text">Kliknij aby zobaczyć szczegóły</string>
+    <string name="notification_junction"> i </string>
     <string name="humidity_label">Wilgotność: </string>
     <string name="pressure_label">Ciśnienie: </string>
 

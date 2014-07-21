@@ -10,6 +10,7 @@
     <string name="data_fetched">Data fetched</string>
     <string name="refresh">Refresh</string>
     <string name="notification_now">Now: </string>
+    <string name="notification_junction"> and </string>
     <string name="notification_text">Open WeatherStation for details</string>
     <string name="humidity_label">Humidity: </string>
     <string name="pressure_label">Pressure: </string>

@@ -20,7 +20,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class MainActivity extends MyActionBarActivity implements View.OnClickListener {
+public class MainActivity extends MyActionBarActivity {
 
     public static final String SHARED_PREFERENCE_NAME = "weatherData";
     public static final String LAST_READOUT_KEY = "lastReadout";
@@ -205,6 +205,8 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
 
     SwipeRefreshLayout swipeLayout;
 
+    Button button;
+
     /**
      * Called when the activity is first created.
      */
@@ -278,28 +280,45 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
         Long lDiff = Long.parseLong(sharedPref.getString(SettingsActivity.REQUEST_INTERVAL, "60"), 10) * 60;
 
         Intent startServiceIntent = new Intent(this, WeatherPollerService.class);
-        PendingIntent startWebServicePendingIntent = PendingIntent.getService(this, 0, startServiceIntent, 0);
+        PendingIntent startWebServicePendingIntent = PendingIntent.getService(this, 0, startServiceIntent, PendingIntent.FLAG_NO_CREATE);
 
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmManager.cancel(startWebServicePendingIntent);
-        alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis(), lDiff * 60 * 1000, startWebServicePendingIntent);
+        AlarmManager alarmManager;
+        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        if (startWebServicePendingIntent != null) {
+            alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis() + (lDiff * 60 * 1000), lDiff * 60 * 1000, startWebServicePendingIntent);
+        }
 
         /*
          * Register alarm service for morning weather notification
          */
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis() + 86400000);
-        calendar.set(Calendar.HOUR_OF_DAY, 8);
+        calendar.setTimeInMillis(System.currentTimeMillis());
+
+        int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+
+        if (currentHour > 15) {
+            //Set for next day 8:00
+
+            calendar.setTimeInMillis(System.currentTimeMillis() + 86400000);
+            calendar.set(Calendar.HOUR_OF_DAY, 8);
+
+        } else if (currentHour > 7) {
+            //Set for this day 16:00
+            calendar.set(Calendar.HOUR_OF_DAY, 16);
+        } else {
+            //Set for this day 8:00
+            calendar.set(Calendar.HOUR_OF_DAY, 8);
+        }
+
         calendar.set(Calendar.MINUTE, 0);
 
         Intent notificationServiceIntent = new Intent(this, WeatherNotificationService.class);
-        PendingIntent notificationServicePendingIntent = PendingIntent.getService(this, 0, notificationServiceIntent, 0);
+        PendingIntent notificationServicePendingIntent = PendingIntent.getService(this, 0, notificationServiceIntent, PendingIntent.FLAG_NO_CREATE);
 
-        alarmManager.cancel(notificationServicePendingIntent);
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 28800000, notificationServicePendingIntent);
-    }
-
-    public void onClick(View view) {
+        if (notificationServicePendingIntent != null) {
+            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 28800000, notificationServicePendingIntent);
+        }
 
     }
 
