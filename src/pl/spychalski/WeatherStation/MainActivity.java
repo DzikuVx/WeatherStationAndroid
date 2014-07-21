@@ -320,6 +320,7 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
         switch (item.getItemId()) {
 
             case R.id.menu_refresh:
+                swipeLayout.setRefreshing(true);
                 getData();
                 return true;
 

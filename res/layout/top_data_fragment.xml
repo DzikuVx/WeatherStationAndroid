@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relativeLayout"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentRight="true"
+    android:layout_alignParentTop="true"
+    android:background="@color/colorPrimary">
+
+    <TextView
+        android:id="@+id/currentTemperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="12sp"
+        android:layout_marginTop="12sp"
+        android:text="@string/empty_temperature"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/textLightPrimary"
+        android:textSize="@dimen/display2" />
+
+    <ImageView
+        android:id="@+id/currentWeatherIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12sp"
+        android:contentDescription="@string/current_weather_icon"
+        android:src="@drawable/icon_01d" />
+
+    <TextView
+        android:id="@+id/maxTemperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/currentTemperature"
+        android:layout_marginLeft="12sp"
+        android:layout_marginTop="6sp"
+        android:layout_toRightOf="@+id/currentTemperature"
+        android:text="@string/empty_temperature"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/textLightSecondary"
+        android:textSize="@dimen/subhead" />
+
+    <TextView
+        android:id="@+id/minTemperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/currentTemperature"
+        android:layout_marginBottom="6sp"
+        android:layout_marginLeft="12sp"
+        android:layout_toRightOf="@+id/currentTemperature"
+        android:text="@string/empty_temperature"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/textLightSecondary"
+        android:textSize="@dimen/subhead" />
+
+    <TextView
+        android:id="@+id/humidityLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/currentTemperature"
+        android:layout_marginLeft="12sp"
+        android:layout_marginTop="6sp"
+        android:text="@string/humidity_label"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/textLightSecondary"
+        android:textSize="@dimen/subhead" />
+
+    <TextView
+        android:id="@+id/currentHumidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/humidityLabel"
+        android:layout_marginLeft="4sp"
+        android:layout_toRightOf="@+id/humidityLabel"
+        android:text="--%"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/textLightPrimary"
+        android:textSize="@dimen/subhead" />
+
+    <TextView
+        android:id="@+id/pressureLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/humidityLabel"
+        android:layout_marginLeft="12sp"
+        android:text="@string/pressure_label"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/textLightSecondary"
+        android:textSize="@dimen/subhead" />
+
+    <TextView
+        android:id="@+id/currentPressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/pressureLabel"
+        android:layout_marginLeft="4sp"
+        android:layout_toRightOf="@+id/pressureLabel"
+        android:text="--hPa"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/textLightPrimary"
+        android:textSize="@dimen/subhead" />
+
+    <Space
+        android:layout_width="20sp"
+        android:layout_height="12sp"
+        android:layout_below="@+id/pressureLabel" />
+
+
+</RelativeLayout>

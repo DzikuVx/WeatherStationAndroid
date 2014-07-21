@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dataTable"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/relativeLayout"
+    android:layout_marginTop="8sp">
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/wind"
+            android:textColor="@color/colorSecondary"
+            android:textSize="@dimen/subhead" />
+
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/clouds"
+            android:textColor="@color/colorSecondary"
+            android:textSize="@dimen/subhead" />
+
+        <TextView
+            android:id="@+id/rainHeader"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/rain"
+            android:textColor="@color/colorSecondary"
+            android:textSize="@dimen/subhead" />
+
+        <TextView
+            android:id="@+id/snowHeader"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/snow"
+            android:textColor="@color/colorSecondary"
+            android:textSize="@dimen/subhead" />
+    </TableRow>
+
+    <TableRow
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/windSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="--m/s"
+                android:textColor="@color/textPrimary"
+                android:textSize="@dimen/subhead" />
+
+            <TextView
+                android:id="@+id/windDirection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="--%"
+                android:textColor="@color/textPrimary"
+                android:textSize="@dimen/subhead" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/cloudCoverage"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="--%"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/subhead" />
+
+        <TextView
+            android:id="@+id/rainValue"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="--mm/h"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/subhead" />
+
+        <TextView
+            android:id="@+id/snowValue"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="--mm/h"
+            android:textColor="@color/textPrimary"
+            android:textSize="@dimen/subhead" />
+
+
+    </TableRow>
+</TableLayout>
