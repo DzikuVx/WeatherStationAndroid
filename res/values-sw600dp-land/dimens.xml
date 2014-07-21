@@ -10,6 +10,6 @@
     <dimen name="display3">56sp</dimen>
     <dimen name="display4">112sp</dimen>
 
-    <dimen name="dataTableFontSize">16sp</dimen>
+    <dimen name="dataTableFontSize">20sp</dimen>
 
 </resources>

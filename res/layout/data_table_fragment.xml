@@ -17,7 +17,7 @@
             android:gravity="center"
             android:text="@string/wind"
             android:textColor="@color/colorSecondary"
-            android:textSize="@dimen/subhead" />
+            android:textSize="@dimen/dataTableFontSize" />
 
         <TextView
             android:layout_height="wrap_content"
@@ -25,7 +25,7 @@
             android:gravity="center"
             android:text="@string/clouds"
             android:textColor="@color/colorSecondary"
-            android:textSize="@dimen/subhead" />
+            android:textSize="@dimen/dataTableFontSize" />
 
         <TextView
             android:id="@+id/rainHeader"
@@ -34,7 +34,7 @@
             android:gravity="center"
             android:text="@string/rain"
             android:textColor="@color/colorSecondary"
-            android:textSize="@dimen/subhead" />
+            android:textSize="@dimen/dataTableFontSize" />
 
         <TextView
             android:id="@+id/snowHeader"
@@ -43,7 +43,7 @@
             android:gravity="center"
             android:text="@string/snow"
             android:textColor="@color/colorSecondary"
-            android:textSize="@dimen/subhead" />
+            android:textSize="@dimen/dataTableFontSize" />
     </TableRow>
 
     <TableRow
@@ -65,7 +65,7 @@
                 android:gravity="center"
                 android:text="--m/s"
                 android:textColor="@color/textPrimary"
-                android:textSize="@dimen/subhead" />
+                android:textSize="@dimen/dataTableFontSize" />
 
             <TextView
                 android:id="@+id/windDirection"
@@ -75,7 +75,7 @@
                 android:gravity="center"
                 android:text="--%"
                 android:textColor="@color/textPrimary"
-                android:textSize="@dimen/subhead" />
+                android:textSize="@dimen/dataTableFontSize" />
         </LinearLayout>
 
         <TextView
@@ -84,7 +84,7 @@
             android:gravity="center"
             android:text="--%"
             android:textColor="@color/textPrimary"
-            android:textSize="@dimen/subhead" />
+            android:textSize="@dimen/dataTableFontSize" />
 
         <TextView
             android:id="@+id/rainValue"
@@ -92,7 +92,7 @@
             android:gravity="center"
             android:text="--mm/h"
             android:textColor="@color/textPrimary"
-            android:textSize="@dimen/subhead" />
+            android:textSize="@dimen/dataTableFontSize" />
 
         <TextView
             android:id="@+id/snowValue"
@@ -100,7 +100,7 @@
             android:gravity="center"
             android:text="--mm/h"
             android:textColor="@color/textPrimary"
-            android:textSize="@dimen/subhead" />
+            android:textSize="@dimen/dataTableFontSize" />
 
 
     </TableRow>
