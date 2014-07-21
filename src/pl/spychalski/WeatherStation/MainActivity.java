@@ -10,7 +10,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.Window;
 import android.widget.*;
 import org.json.JSONArray;
@@ -279,47 +278,56 @@ public class MainActivity extends MyActionBarActivity {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
         Long lDiff = Long.parseLong(sharedPref.getString(SettingsActivity.REQUEST_INTERVAL, "60"), 10) * 60;
 
-        Intent startServiceIntent = new Intent(this, WeatherPollerService.class);
-        PendingIntent startWebServicePendingIntent = PendingIntent.getService(this, 0, startServiceIntent, PendingIntent.FLAG_NO_CREATE);
+        Boolean bDoPoller = sharedPref.getBoolean(SettingsActivity.AUTO_UPDATE, true);
+        Boolean bDoNotifications = sharedPref.getBoolean(SettingsActivity.NOTIFICATIONS, true);
 
-        AlarmManager alarmManager;
-        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        if (bDoNotifications || bDoPoller) {
+            AlarmManager alarmManager;
+            alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
-        if (startWebServicePendingIntent != null) {
-            alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis() + (lDiff * 60 * 1000), lDiff * 60 * 1000, startWebServicePendingIntent);
+            if (bDoPoller) {
+                Intent startServiceIntent = new Intent(this, WeatherPollerService.class);
+                PendingIntent startWebServicePendingIntent = PendingIntent.getService(this, 0, startServiceIntent, PendingIntent.FLAG_NO_CREATE);
+
+                if (startWebServicePendingIntent != null) {
+                    alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis() + (lDiff * 60 * 1000), lDiff * 60 * 1000, startWebServicePendingIntent);
+                }
+            }
+
+            if (bDoNotifications) {
+                /*
+                * Register alarm service for morning weather notification
+                */
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTimeInMillis(System.currentTimeMillis());
+
+                int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+
+                if (currentHour > 15) {
+                    //Set for next day 8:00
+
+                    calendar.setTimeInMillis(System.currentTimeMillis() + 86400000);
+                    calendar.set(Calendar.HOUR_OF_DAY, 8);
+
+                } else if (currentHour > 7) {
+                    //Set for this day 16:00
+                    calendar.set(Calendar.HOUR_OF_DAY, 16);
+                } else {
+                    //Set for this day 8:00
+                    calendar.set(Calendar.HOUR_OF_DAY, 8);
+                }
+
+                calendar.set(Calendar.MINUTE, 0);
+
+                Intent notificationServiceIntent = new Intent(this, WeatherNotificationService.class);
+                PendingIntent notificationServicePendingIntent = PendingIntent.getService(this, 0, notificationServiceIntent, PendingIntent.FLAG_NO_CREATE);
+
+                if (notificationServicePendingIntent != null) {
+                    alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 28800000, notificationServicePendingIntent);
+                }
+            }
+
         }
-
-        /*
-         * Register alarm service for morning weather notification
-         */
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(System.currentTimeMillis());
-
-        int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
-
-        if (currentHour > 15) {
-            //Set for next day 8:00
-
-            calendar.setTimeInMillis(System.currentTimeMillis() + 86400000);
-            calendar.set(Calendar.HOUR_OF_DAY, 8);
-
-        } else if (currentHour > 7) {
-            //Set for this day 16:00
-            calendar.set(Calendar.HOUR_OF_DAY, 16);
-        } else {
-            //Set for this day 8:00
-            calendar.set(Calendar.HOUR_OF_DAY, 8);
-        }
-
-        calendar.set(Calendar.MINUTE, 0);
-
-        Intent notificationServiceIntent = new Intent(this, WeatherNotificationService.class);
-        PendingIntent notificationServicePendingIntent = PendingIntent.getService(this, 0, notificationServiceIntent, PendingIntent.FLAG_NO_CREATE);
-
-        if (notificationServicePendingIntent != null) {
-            alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), 28800000, notificationServicePendingIntent);
-        }
-
     }
 
     private void getData() {

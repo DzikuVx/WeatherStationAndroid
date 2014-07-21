@@ -2,6 +2,14 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <CheckBoxPreference
+        android:key="pref_auto_update"
+        android:title="@string/settings_update_in_background"
+        android:defaultValue="true"/>
+    <CheckBoxPreference
+        android:key="pref_notifications"
+        android:title="@string/settings_notifications"
+        android:defaultValue="true"/>
     <EditTextPreference
         android:key="pref_update_interval"
         android:title="@string/update_interval"

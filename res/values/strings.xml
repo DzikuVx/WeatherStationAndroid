@@ -41,4 +41,7 @@
     <string name="dayOfWeek_6">Sat</string>
 
     <string name="forecast">Forecast</string>
+
+    <string name="settings_update_in_background">Auto update in background</string>
+    <string name="settings_notifications">Weather notifications</string>
 </resources>

@@ -41,4 +41,8 @@
     <string name="dayOfWeek_6">Niedz.</string>
 
     <string name="forecast">Prognoza</string>
+
+    <string name="settings_update_in_background">Automatyczne pobieranie danych</string>
+    <string name="settings_notifications">Powiadomienia o pogodzie</string>
+
 </resources>
