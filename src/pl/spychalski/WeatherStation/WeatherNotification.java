@@ -1,11 +1,11 @@
 package pl.spychalski.WeatherStation;
 
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 import org.json.JSONObject;
 
@@ -36,13 +36,14 @@ public class WeatherNotification {
                 notification.setContentTitle(context.getString(R.string.notification_now) + " " + jData.getString("Temperature") + "\u00B0C " + context.getString(R.string.notification_junction) + " " + jData.getString("Pressure") + "hPa");
                 notification.setContentText(context.getString(R.string.notification_text));
                 notification.setSmallIcon(Utils.getImageIdentifier(context, "icon_" + jData.getString("WeatherIcon")));
+                notification.setAutoCancel(true);
 
                 Intent intent = new Intent(context, MainActivity.class);
 
                 PendingIntent resultPendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
                 notification.setContentIntent(resultPendingIntent);
 
-                NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                NotificationManagerCompat mNotificationManager = NotificationManagerCompat.from(context);
                 mNotificationManager.notify(0, notification.build());
             } catch (Exception e) {
                 Log.e("Error", "Failed to format notification", e);
