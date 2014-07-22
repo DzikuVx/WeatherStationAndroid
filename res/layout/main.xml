@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:text="New Button"
             android:id="@+id/button"
+            android:visibility="gone"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true" />
 

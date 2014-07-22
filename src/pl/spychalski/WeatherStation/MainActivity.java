@@ -1,8 +1,6 @@
 package pl.spychalski.WeatherStation;
 
-import android.app.*;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,9 +14,7 @@ import android.widget.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class MainActivity extends MyActionBarActivity implements View.OnClickListener {
 
@@ -28,56 +24,85 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
 
     public static final String DEBUG_TAG = "Debug";
 
-    private void updateView() {
+    private class DataResult {
+        public JSONObject json = null;
+        public ArrayList<DayForecastSimple> forecastData = null;
+    }
 
-        SharedPreferences weatherData = getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
-        String sLastReadout = weatherData.getString(LAST_READOUT_KEY, null);
+    private class PopulateUI extends AsyncTask<String, Void, DataResult> {
 
-        Long lLastReadoutTimestamp = weatherData.getLong(LAST_READOUT_TIMESTAMP_KEY, 0);
-        Long lCurrentTimestamp = System.currentTimeMillis() / 1000;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            setProgressBarIndeterminateVisibility(true);
+        }
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
-        Long lDiff = Long.parseLong(sharedPref.getString(SettingsActivity.REQUEST_INTERVAL, "60"), 10) * 60;
+        @Override
+        protected void onPostExecute(DataResult result) {
 
-        if (sLastReadout != null) {
             try {
-                JSONObject jData = new JSONObject(sLastReadout);
 
-                currentTemperature.setText(jData.getString("Temperature") + "\u00B0C");
-                maxTemperature.setText(jData.getString("TempMax") + "\u00B0C");
-                minTemperature.setText(jData.getString("TempMin") + "\u00B0C");
-                currentWeatherIcon.setImageResource(Utils.getImageIdentifier(this, "icon_" + jData.getString("WeatherIcon")));
-                currentHumidity.setText(jData.getString("Humidity") + "%");
-                currentPressure.setText(jData.getString("Pressure") + "hPa");
+                if (result.json != null) {
 
-                windSpeed.setText(jData.getString("WindSpeed") + "m/s");
-                windDirection.setText(Integer.toString(Math.round(Float.parseFloat(jData.getString("WindDirection")))) + "°");
-                cloudCoverage.setText(jData.getString("Clouds") + "%");
+                    currentTemperature.setText(result.json.getString("Temperature") + "\u00B0C");
+                    maxTemperature.setText(result.json.getString("TempMax") + "\u00B0C");
+                    minTemperature.setText(result.json.getString("TempMin") + "\u00B0C");
+                    currentWeatherIcon.setImageResource(Utils.getImageIdentifier(MainActivity.this, "icon_" + result.json.getString("WeatherIcon")));
+                    currentHumidity.setText(result.json.getString("Humidity") + "%");
+                    currentPressure.setText(result.json.getString("Pressure") + "hPa");
 
-                Float value = Float.parseFloat(jData.getString("Rain"));
-                if (value > 0) {
-                    rainValue.setText(Integer.toString(Math.round(value)) + "mm/h");
-                    rainValue.setVisibility(TextView.VISIBLE);
-                    rainHeader.setVisibility(TextView.VISIBLE);
-                } else {
-                    rainValue.setVisibility(TextView.GONE);
-                    rainHeader.setVisibility(TextView.GONE);
+                    windSpeed.setText(result.json.getString("WindSpeed") + "m/s");
+                    windDirection.setText(Integer.toString(Math.round(Float.parseFloat(result.json.getString("WindDirection")))) + "°");
+                    cloudCoverage.setText(result.json.getString("Clouds") + "%");
+
+                    Float value = Float.parseFloat(result.json.getString("Rain"));
+                    if (value > 0) {
+                        rainValue.setText(Integer.toString(Math.round(value)) + "mm/h");
+                        rainValue.setVisibility(TextView.VISIBLE);
+                        rainHeader.setVisibility(TextView.VISIBLE);
+                    } else {
+                        rainValue.setVisibility(TextView.GONE);
+                        rainHeader.setVisibility(TextView.GONE);
+                    }
+
+                    value = Float.parseFloat(result.json.getString("Snow"));
+                    if (value > 0) {
+                        snowValue.setText(Integer.toString(Math.round(value)) + "mm/h");
+                        snowValue.setVisibility(TextView.VISIBLE);
+                        snowHeader.setVisibility(TextView.VISIBLE);
+                    } else {
+                        snowValue.setVisibility(TextView.GONE);
+                        snowHeader.setVisibility(TextView.GONE);
+                    }
                 }
 
-                value = Float.parseFloat(jData.getString("Snow"));
-                if (value > 0) {
-                    snowValue.setText(Integer.toString(Math.round(value)) + "mm/h");
-                    snowValue.setVisibility(TextView.VISIBLE);
-                    snowHeader.setVisibility(TextView.VISIBLE);
-                } else {
-                    snowValue.setVisibility(TextView.GONE);
-                    snowHeader.setVisibility(TextView.GONE);
+                if (result.forecastData != null) {
+                    ForecastListAdapter adapter = new ForecastListAdapter(MainActivity.this, result.forecastData);
+                    dataList.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
                 }
 
-                JSONArray jForecastData = jData.getJSONArray("Forecast");
+            } catch (JSONException e) {
+                Log.e("Error", "failed to build", e);
+                e.printStackTrace();
+            }
+
+            super.onPostExecute(result);
+            setProgressBarIndeterminateVisibility(false);
+        }
+
+        @Override
+        protected DataResult doInBackground(String... params) {
+
+            DataResult result = new DataResult();
+
+            try {
+                result.json = new JSONObject(params[0]);
+
+                JSONArray jForecastData = result.json.getJSONArray("Forecast");
                 JSONObject jForecast;
 
-                ArrayList<DayForecastSimple> forecastSimples = new ArrayList<DayForecastSimple>();
+                result.forecastData = new ArrayList<DayForecastSimple>();
 
                 for (int i = 0; i < jForecastData.length(); i++) {
                     jForecast = (JSONObject) jForecastData.get(i);
@@ -101,81 +126,31 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
                     day.setWindSpeed(jForecast.getString("WindSpeed"));
                     day.setWindDirection(jForecast.getString("WindDirection"));
 
-                    forecastSimples.add(day);
+                    result.forecastData.add(day);
                 }
-
-                ForecastListAdapter adapter = new ForecastListAdapter(this, forecastSimples);
-                dataList.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
-
-//                Toast.makeText(this, "Done", Toast.LENGTH_LONG).show();
-
-//                Iterator<?> keys = jForecastData.keys();
-
-//                while (keys.hasNext()) {
-//                    String key = (String) keys.next();
-
-//                    jForecast = (JSONObject) jForecastData.getJSONObject(key);
-//
-//                }
-
-                /*
-                Iterator<?> keys = jData.keys();
-
-                while (keys.hasNext()) {
-                    String key = (String) keys.next();
-                    ReadoutValue entry = new ReadoutValue();
-
-                    if (key.equals("Humidity")) {
-                        entry.setValue(jData.getString(key));
-                        entry.setUnit("%");
-                    } else if (key.equals("Pressure")) {
-                        entry.setValue(Integer.toString(Math.round(Float.parseFloat(jData.getString(key)))));
-                        entry.setUnit("hPa");
-                    } else if (key.equals("WindSpeed")) {
-                        entry.setValue(jData.getString(key));
-                        entry.setUnit("m/s");
-                    } else if (key.equals("WindDirection")) {
-                        entry.setValue(Integer.toString(Math.round(Float.parseFloat(jData.getString(key)))));
-                        entry.setUnit("\u00B0");
-                    } else if (key.equals("TempMax")) {
-                        entry.setValue(jData.getString(key));
-                        entry.setUnit("\u00B0C");
-                    } else if (key.equals("TempMin")) {
-                        entry.setValue(jData.getString(key));
-                        entry.setUnit("\u00B0C");
-                    } else if (key.equals("Clouds")) {
-                        entry.setValue(jData.getString(key));
-                        entry.setUnit("%");
-                    } else if (key.equals("Rain") || key.equals("Snow")) {
-
-                        if (Float.parseFloat(jData.getString(key)) == 0) {
-                            continue;
-                        }
-
-                        entry.setValue(jData.getString(key));
-                        entry.setUnit("mm/h");
-                    } else {
-                        continue;
-                    }
-
-                    entry.setName(getString(getStringIdentifier(this, "readoutName_" + key)));
-
-                    values.add(entry);
-                }
-
-                ReadoutValuesListAdapter adapter = new ReadoutValuesListAdapter(this, values);
-                dataList.setAdapter(adapter);
-
-                adapter.notifyDataSetChanged();
-
-                */
 
             } catch (JSONException e) {
                 Log.e("Error", "failed to build", e);
                 e.printStackTrace();
             }
 
+            return result;
+        }
+    }
+
+    private void updateView() {
+
+        SharedPreferences weatherData = getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
+        String sLastReadout = weatherData.getString(LAST_READOUT_KEY, null);
+
+        Long lLastReadoutTimestamp = weatherData.getLong(LAST_READOUT_TIMESTAMP_KEY, 0);
+        Long lCurrentTimestamp = System.currentTimeMillis() / 1000;
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        Long lDiff = Long.parseLong(sharedPref.getString(SettingsActivity.REQUEST_INTERVAL, "60"), 10) * 60;
+
+        if (sLastReadout != null) {
+            new PopulateUI().execute(sLastReadout);
         }
 
         //If not data, or data is old, start new request for data
