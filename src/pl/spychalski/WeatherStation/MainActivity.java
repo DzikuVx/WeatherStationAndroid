@@ -34,7 +34,6 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            setProgressBarIndeterminateVisibility(true);
         }
 
         @Override
@@ -88,7 +87,6 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
             }
 
             super.onPostExecute(result);
-            setProgressBarIndeterminateVisibility(false);
         }
 
         @Override
