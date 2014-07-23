@@ -52,6 +52,10 @@ public class DayForecastSimple implements Serializable {
         return Pressure;
     }
 
+    public int getPressureInt() {
+        return Math.round(Float.parseFloat(Pressure));
+    }
+
     public void setPressure(String pressure) {
         Pressure = pressure;
     }
@@ -162,6 +166,10 @@ public class DayForecastSimple implements Serializable {
 
     public int getIntTempDay() {
         return Math.round(Float.parseFloat(TempDay));
+    }
+
+    public int getIntTempNight() {
+        return Math.round(Float.parseFloat(TempNight));
     }
 
     public void setTempDay(String tempDay) {

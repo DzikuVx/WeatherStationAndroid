@@ -14,6 +14,7 @@
     <string name="notification_text">Open WeatherStation for details</string>
     <string name="humidity_label">Humidity: </string>
     <string name="pressure_label">Pressure: </string>
+    <string name="dummy_temp">--.-</string>
 
     <string name="readoutName_Humidity">Humidity</string>
     <string name="readoutName_Pressure">Pressure</string>
@@ -44,4 +45,12 @@
 
     <string name="settings_update_in_background">Auto update in background</string>
     <string name="settings_notifications">Weather notifications</string>
+
+    <string name="forecast_temperatureHeader">Temperature</string>
+    <string name="forecast_pressureHeader">Pressure</string>
+    <string name="forecast_humidityHeader">Humidity</string>
+    <string name="forecast_cloudsHeader">Clouds</string>
+    <string name="forecast_day">Day</string>
+    <string name="forecast_night">Night</string>
+
 </resources>

@@ -37,8 +37,7 @@
         android:src="@drawable/ic_action_send"
         android:background="@color/colorAccent"
         android:layout_marginTop="24dp"
-        android:layout_alignParentEnd="true"
-        android:visibility="invisible" />
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:layout_width="wrap_content"
