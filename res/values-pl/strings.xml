@@ -45,4 +45,14 @@
     <string name="settings_update_in_background">Automatyczne pobieranie danych</string>
     <string name="settings_notifications">Powiadomienia o pogodzie</string>
 
+    <string name="forecast_temperatureHeader">Temperatura</string>
+    <string name="forecast_pressureHeader">Ciśnienie</string>
+    <string name="forecast_humidityHeader">Wilgotność</string>
+    <string name="forecast_cloudsHeader">Zachmurzenie</string>
+    <string name="forecast_rainHeader">Deszcz</string>
+    <string name="forecast_snowHeader">Śnieg</string>
+    <string name="forecast_windHeader">Wiatr</string>
+    <string name="forecast_day">Dzień</string>
+    <string name="forecast_night">Noc</string>
+
 </resources>

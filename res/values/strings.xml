@@ -50,6 +50,9 @@
     <string name="forecast_pressureHeader">Pressure</string>
     <string name="forecast_humidityHeader">Humidity</string>
     <string name="forecast_cloudsHeader">Clouds</string>
+    <string name="forecast_rainHeader">Rain</string>
+    <string name="forecast_snowHeader">Snow</string>
+    <string name="forecast_windHeader">Wind</string>
     <string name="forecast_day">Day</string>
     <string name="forecast_night">Night</string>
 

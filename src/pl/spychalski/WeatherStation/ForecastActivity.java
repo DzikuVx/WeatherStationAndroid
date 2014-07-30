@@ -1,6 +1,7 @@
 package pl.spychalski.WeatherStation;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +16,12 @@ public class ForecastActivity extends MyActionBarActivity {
     TextView pressure;
     TextView humidity;
     TextView clouds;
+    TextView rain;
+    TextView rainHeader;
+    TextView snow;
+    TextView snowHeader;
+    TextView windSpeed;
+    TextView windDirection;
     ImageView weatherIcon;
 
     @Override
@@ -35,6 +42,12 @@ public class ForecastActivity extends MyActionBarActivity {
         pressure = (TextView) findViewById(R.id.pressure);
         humidity = (TextView) findViewById(R.id.humidity);
         clouds = (TextView) findViewById(R.id.clouds);
+        rain = (TextView) findViewById(R.id.rain);
+        rainHeader = (TextView) findViewById(R.id.rainHeader);
+        snow = (TextView) findViewById(R.id.snow);
+        snowHeader = (TextView) findViewById(R.id.snowHeader);
+        windDirection = (TextView) findViewById(R.id.windDirection);
+        windSpeed = (TextView) findViewById(R.id.windSpeed);
 
         date.setText(weatherData.getDate());
         dayOfWeek.setText(weatherData.getTranslatedDayOfWeek(this));
@@ -44,6 +57,27 @@ public class ForecastActivity extends MyActionBarActivity {
         pressure.setText(Integer.toString(weatherData.getPressureInt()) + "hPa");
         humidity.setText(weatherData.getHumidity() + "%");
         clouds.setText(weatherData.getClouds() + "%");
+        rain.setText(weatherData.getRain() + "mm/h");
+        snow.setText(weatherData.getSnow() + "mm/h");
+        windDirection.setText(weatherData.getWindDirection() + "°");
+        windSpeed.setText(weatherData.getWindSpeed() + "m/s");
+
+        if (Float.parseFloat(weatherData.getRain()) > 0) {
+            rain.setVisibility(View.VISIBLE);
+            rainHeader.setVisibility(View.VISIBLE);
+        } else {
+            rain.setVisibility(View.GONE);
+            rainHeader.setVisibility(View.GONE);
+        }
+
+        if (Float.parseFloat(weatherData.getSnow()) > 0) {
+            snow.setVisibility(View.VISIBLE);
+            snowHeader.setVisibility(View.VISIBLE);
+        } else {
+            snow.setVisibility(View.GONE);
+            snowHeader.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
