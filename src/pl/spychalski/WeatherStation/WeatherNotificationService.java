@@ -53,10 +53,11 @@ public class WeatherNotificationService extends IntentService {
             calendar.set(Calendar.MINUTE, 0);
 
             Intent notificationServiceIntent = new Intent(context, WeatherNotificationService.class);
-            PendingIntent notificationServicePendingIntent = PendingIntent.getService(context, 0, notificationServiceIntent, PendingIntent.FLAG_NO_CREATE);
+            PendingIntent notificationServicePendingIntent = PendingIntent.getService(context, 0, notificationServiceIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             if (notificationServicePendingIntent != null) {
                 alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, notificationServicePendingIntent);
+                Log.d("Notif", "Cotification alarm created");
             }
 
         }

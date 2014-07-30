@@ -35,7 +35,7 @@ public class WeatherPollerService extends IntentService {
             alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
             Intent startServiceIntent = new Intent(context, WeatherPollerService.class);
-            PendingIntent startWebServicePendingIntent = PendingIntent.getService(context, 0, startServiceIntent, PendingIntent.FLAG_NO_CREATE);
+            PendingIntent startWebServicePendingIntent = PendingIntent.getService(context, 0, startServiceIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             if (startWebServicePendingIntent != null) {
                 alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis() + (lDiff * 60 * 1000), lDiff * 60 * 1000, startWebServicePendingIntent);
