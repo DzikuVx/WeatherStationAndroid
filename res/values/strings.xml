@@ -7,6 +7,7 @@
     <string name="api_url">API Url</string>
     <string name="app_full_name">WeatherStation Android Client</string>
     <string name="error_occured">Something went wrong</string>
+    <string name="error_data_not_fetched">Something went wrong, looks like server failed to response</string>
     <string name="data_fetched">Data fetched</string>
     <string name="refresh">Refresh</string>
     <string name="notification_now">Now: </string>

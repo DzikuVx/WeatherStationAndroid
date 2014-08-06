@@ -138,7 +138,7 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
 
     private void updateView() {
 
-        SharedPreferences weatherData = getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
+        SharedPreferences weatherData = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
         String sLastReadout = weatherData.getString(LAST_READOUT_KEY, null);
 
         Long lLastReadoutTimestamp = weatherData.getLong(LAST_READOUT_TIMESTAMP_KEY, 0);
@@ -304,8 +304,10 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
             Context context = getApplicationContext();
 
             if (result != null && result.length() > 5 && context != null) {
-                Toast.makeText(context, getString(R.string.data_fetched), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, getString(R.string.data_fetched), Toast.LENGTH_SHORT).show();
                 updateView();
+            } else {
+                Toast.makeText(context, getString(R.string.error_data_not_fetched), Toast.LENGTH_LONG).show();
             }
 
             swipeLayout.setRefreshing(false);
@@ -317,17 +319,10 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
 
             String response = null;
 
-            Context context = getApplicationContext();
             WeatherPoller poller = new WeatherPoller(MainActivity.this);
 
             try {
-
                 response = poller.execute();
-
-                if (context != null && response == null) {
-                    Toast.makeText(context, getString(R.string.error_occured), Toast.LENGTH_LONG).show();
-                }
-
             } catch (NoNetworkConnection e) {
                 Log.i("Network", "No network connection");
             }

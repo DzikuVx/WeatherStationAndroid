@@ -16,12 +16,14 @@ public class WeatherPollerService extends IntentService {
     }
 
     protected void onHandleIntent(Intent intent) {
+
         WeatherPoller poller = new WeatherPoller(this);
         try {
             poller.execute();
         } catch (NoNetworkConnection e) {
-            Log.i("Network", "No network connection");
+            Log.e("Network", "No network connection");
         }
+        Log.i("Poller", "WeatherPollerService executed");
     }
 
     public static void createAlarm(Context context) {

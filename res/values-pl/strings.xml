@@ -7,6 +7,7 @@
     <string name="api_url">Adres API</string>
     <string name="app_full_name">Pogoda w Szczecinie</string>
     <string name="error_occured">Chyba coś się nie udało...</string>
+    <string name="error_data_not_fetched">Chyba coś się nie udało, wygląda to jak problemy z serwerem</string>
     <string name="data_fetched">Pobrano dane</string>
     <string name="refresh">Odśwież</string>
     <string name="notification_now">Teraz: </string>

@@ -10,9 +10,13 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
 public class WeatherPoller {
+
+    public static final int CONNECTION_TIMEOUT = 10;
 
     private Context context;
 
@@ -35,6 +39,10 @@ public class WeatherPoller {
         try {
 
             HttpClient httpclient = new DefaultHttpClient();
+
+            final HttpParams httpParameters = httpclient.getParams();
+            HttpConnectionParams.setConnectionTimeout(httpParameters, CONNECTION_TIMEOUT * 1000);
+
             HttpGet httpGet = new HttpGet(sUrl);
             HttpResponse httpResponse = httpclient.execute(httpGet);
             HttpEntity httpEntity = httpResponse.getEntity();
@@ -42,7 +50,7 @@ public class WeatherPoller {
             response = EntityUtils.toString(httpEntity);
 
             //Save last response to shared storage
-            SharedPreferences weatherData = context.getSharedPreferences(MainActivity.SHARED_PREFERENCE_NAME, 0);
+            SharedPreferences weatherData = context.getApplicationContext().getSharedPreferences(MainActivity.SHARED_PREFERENCE_NAME, 0);
             SharedPreferences.Editor editor = weatherData.edit();
             editor.putString(MainActivity.LAST_READOUT_KEY, response);
 
@@ -50,7 +58,7 @@ public class WeatherPoller {
             editor.putLong(MainActivity.LAST_READOUT_TIMESTAMP_KEY, System.currentTimeMillis() / 1000);
             editor.commit();
 
-            Log.d("Info", "Poller service executed successfully");
+            Log.d("Info", "Poller executed successfully");
 
             return response;
         } catch (Exception ex) {
