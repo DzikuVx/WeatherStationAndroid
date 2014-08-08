@@ -14,7 +14,10 @@ import android.widget.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MainActivity extends MyActionBarActivity implements View.OnClickListener {
 
@@ -168,6 +171,7 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
     TextView windSpeed;
     TextView windDirection;
     TextView cloudCoverage;
+    TextView lastReadout;
 
     TextView rainValue;
     TextView rainHeader;
@@ -228,6 +232,14 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
 
         button = (Button) findViewById(R.id.button);
         button.setOnClickListener(this);
+
+        lastReadout = (TextView) findViewById(R.id.lastReadout);
+        SharedPreferences weatherData = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
+        Long lLastReadout = weatherData.getLong(LAST_READOUT_TIMESTAMP_KEY, 0);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(lLastReadout * 1000);
+        SimpleDateFormat sdf  = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        lastReadout.setText(sdf.format(calendar.getTime()));
 
         /**
          * Build manual scroll listener to enable SwipeRefreshLayout and ListView

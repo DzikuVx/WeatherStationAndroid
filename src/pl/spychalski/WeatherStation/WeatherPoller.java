@@ -14,6 +14,9 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.http.util.EntityUtils;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class WeatherPoller {
 
     public static final int CONNECTION_TIMEOUT = 10;
@@ -33,11 +36,10 @@ public class WeatherPoller {
 
         String response;
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         String sUrl = sharedPref.getString(SettingsActivity.API_URL_KEY, "");
 
         try {
-
             HttpClient httpclient = new DefaultHttpClient();
 
             final HttpParams httpParameters = httpclient.getParams();
@@ -59,7 +61,6 @@ public class WeatherPoller {
             editor.commit();
 
             Log.d("Info", "Poller executed successfully");
-
             return response;
         } catch (Exception ex) {
             Log.e("WeatherStation", "Exception", ex);

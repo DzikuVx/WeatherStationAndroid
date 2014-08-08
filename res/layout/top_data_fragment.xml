@@ -112,5 +112,18 @@
         android:layout_height="12sp"
         android:layout_below="@+id/pressureLabel" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="-"
+        android:id="@+id/lastReadout"
+        android:textSize="@dimen/caption"
+        android:textColor="@color/textLightMinor"
+        android:layout_below="@+id/currentWeatherIcon"
+        android:layout_marginRight="4dp"
+        android:layout_alignParentRight="true"
+        android:visibility="invisible" />
+
 
 </RelativeLayout>

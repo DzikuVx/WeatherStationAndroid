@@ -9,6 +9,9 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class WeatherPollerService extends IntentService {
 
     public WeatherPollerService () {
@@ -16,7 +19,6 @@ public class WeatherPollerService extends IntentService {
     }
 
     protected void onHandleIntent(Intent intent) {
-
         WeatherPoller poller = new WeatherPoller(this);
         try {
             poller.execute();
@@ -40,7 +42,7 @@ public class WeatherPollerService extends IntentService {
             PendingIntent startWebServicePendingIntent = PendingIntent.getService(context, 0, startServiceIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
             if (startWebServicePendingIntent != null) {
-                alarmManager.setInexactRepeating(AlarmManager.RTC, System.currentTimeMillis() + (lDiff * 60 * 1000), lDiff * 60 * 1000, startWebServicePendingIntent);
+                alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + (lDiff * 1000), lDiff * 1000, startWebServicePendingIntent);
             }
         }
 
