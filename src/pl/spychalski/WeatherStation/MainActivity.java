@@ -1,6 +1,5 @@
 package pl.spychalski.WeatherStation;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,6 +25,28 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
     public static final String LAST_READOUT_TIMESTAMP_KEY = "lastReadoutTimestamp";
 
     public static final String DEBUG_TAG = "Debug";
+
+    TextView currentTemperature;
+    TextView maxTemperature;
+    TextView minTemperature;
+    ImageView currentWeatherIcon;
+    TextView currentHumidity;
+    TextView currentPressure;
+    TextView windSpeed;
+    TextView windDirection;
+    TextView cloudCoverage;
+    TextView lastReadout;
+
+    TextView rainValue;
+    TextView rainHeader;
+    TextView snowValue;
+    TextView snowHeader;
+
+    ListView dataList;
+
+    SwipeRefreshLayout swipeLayout;
+
+    Button button;
 
     private class DataResult {
         public JSONObject json = null;
@@ -139,7 +160,7 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
         }
     }
 
-    private void updateView() {
+    public void updateView() {
 
         SharedPreferences weatherData = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
         String sLastReadout = weatherData.getString(LAST_READOUT_KEY, null);
@@ -156,33 +177,11 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
 
         //If not data, or data is old, start new request for data
         if (sLastReadout == null || (lCurrentTimestamp - lLastReadoutTimestamp) > lDiff) {
-            GetDataThread thread = new GetDataThread();
+            GetDataThread thread = new GetDataThread(this);
             thread.execute();
         }
 
     }
-
-    TextView currentTemperature;
-    TextView maxTemperature;
-    TextView minTemperature;
-    ImageView currentWeatherIcon;
-    TextView currentHumidity;
-    TextView currentPressure;
-    TextView windSpeed;
-    TextView windDirection;
-    TextView cloudCoverage;
-    TextView lastReadout;
-
-    TextView rainValue;
-    TextView rainHeader;
-    TextView snowValue;
-    TextView snowHeader;
-
-    ListView dataList;
-
-    SwipeRefreshLayout swipeLayout;
-
-    Button button;
 
     /**
      * Called when the activity is first created.
@@ -234,12 +233,14 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
         button.setOnClickListener(this);
 
         lastReadout = (TextView) findViewById(R.id.lastReadout);
-        SharedPreferences weatherData = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
-        Long lLastReadout = weatherData.getLong(LAST_READOUT_TIMESTAMP_KEY, 0);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(lLastReadout * 1000);
-        SimpleDateFormat sdf  = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        lastReadout.setText(sdf.format(calendar.getTime()));
+        if (lastReadout != null) {
+            SharedPreferences weatherData = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
+            Long lLastReadout = weatherData.getLong(LAST_READOUT_TIMESTAMP_KEY, 0);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(lLastReadout * 1000);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            lastReadout.setText(sdf.format(calendar.getTime()));
+        }
 
         /**
          * Build manual scroll listener to enable SwipeRefreshLayout and ListView
@@ -266,7 +267,7 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
     }
 
     private void getData() {
-        GetDataThread thread = new GetDataThread();
+        GetDataThread thread = new GetDataThread(this);
         thread.execute();
     }
 
@@ -298,50 +299,6 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
                 new WeatherNotification(this).pushDailyNotification();
                 break;
         }
-    }
-
-    private class GetDataThread extends AsyncTask<String, Void, String> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            setProgressBarIndeterminateVisibility(true);
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
-            setProgressBarIndeterminateVisibility(false);
-
-            Context context = getApplicationContext();
-
-            if (result != null && result.length() > 5 && context != null) {
-                Toast.makeText(context, getString(R.string.data_fetched), Toast.LENGTH_SHORT).show();
-                updateView();
-            } else {
-                Toast.makeText(context, getString(R.string.error_data_not_fetched), Toast.LENGTH_LONG).show();
-            }
-
-            swipeLayout.setRefreshing(false);
-
-        }
-
-        @Override
-        protected String doInBackground(String... params) {
-
-            String response = null;
-
-            WeatherPoller poller = new WeatherPoller(MainActivity.this);
-
-            try {
-                response = poller.execute();
-            } catch (NoNetworkConnection e) {
-                Log.i("Network", "No network connection");
-            }
-
-            return response;
-        }
-
     }
 
 }

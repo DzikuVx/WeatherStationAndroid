@@ -36,7 +36,7 @@ public class WeatherPoller {
 
         String response;
 
-         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         String sUrl = sharedPref.getString(SettingsActivity.API_URL_KEY, "");
 
         try {
