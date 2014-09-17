@@ -9,9 +9,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 public class WeatherPollerService extends IntentService {
 
     public WeatherPollerService () {

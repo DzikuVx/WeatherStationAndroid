@@ -2,7 +2,6 @@ package pl.spychalski.WeatherStation;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,11 +12,11 @@ abstract public class MyActionBarActivity extends Activity {
     /**
      * To display back button on action bar
      */
-    protected Boolean displayActionBarBack = true;
+    Boolean displayActionBarBack = true;
 
-    protected Boolean displayActionMenu = true;
+    Boolean displayActionMenu = true;
 
-    protected int menuFile = 0;
+    int menuFile = 0;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

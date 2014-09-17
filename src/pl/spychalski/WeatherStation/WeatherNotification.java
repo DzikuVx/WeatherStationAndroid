@@ -7,11 +7,12 @@ import android.content.SharedPreferences;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
+
 import org.json.JSONObject;
 
-public class WeatherNotification {
+class WeatherNotification {
 
-    private Context context;
+    final private Context context;
 
     public WeatherNotification(Context context) {
         this.context = context;

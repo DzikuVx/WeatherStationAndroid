@@ -8,21 +8,21 @@ public class DayForecastSimple implements Serializable {
 
     private static final long serialVersionUID = 547998742264L;
 
-    String WeatherIcon;
-    String TempMax;
-    String TempMin;
-    String Date;
-    String DayOfWeek;
-    String TempDay;
-    String TempNight;
-    String WeatherCode;
-    String Clouds;
-    String Humidity;
-    String Pressure;
-    String WindSpeed;
-    String WindDirection;
-    String Rain;
-    String Snow;
+    private String WeatherIcon;
+    private String TempMax;
+    private String TempMin;
+    private String Date;
+    private String DayOfWeek;
+    private String TempDay;
+    private String TempNight;
+    private String WeatherCode;
+    private String Clouds;
+    private String Humidity;
+    private String Pressure;
+    private String WindSpeed;
+    private String WindDirection;
+    private String Rain;
+    private String Snow;
 
     public String getWeatherCode() {
         return WeatherCode;

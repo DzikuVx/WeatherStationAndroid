@@ -4,7 +4,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-public final class Utils {
+final class Utils {
 
     public static int getImageIdentifier(Context context, String name) {
         return context.getResources().getIdentifier(name, "drawable", context.getPackageName());

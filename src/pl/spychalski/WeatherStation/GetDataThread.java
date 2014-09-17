@@ -6,7 +6,7 @@ import android.widget.Toast;
 
 public class GetDataThread extends AsyncTask<String, Void, String> {
 
-    private MainActivity mActivity;
+    final private MainActivity mActivity;
 
     public GetDataThread (MainActivity activity){
         mActivity = activity;
@@ -23,7 +23,7 @@ public class GetDataThread extends AsyncTask<String, Void, String> {
         super.onPostExecute(result);
         mActivity.setProgressBarIndeterminateVisibility(false);
 
-        if (result != null && result.length() > 5 && mActivity != null) {
+        if (result != null && result.length() > 5) {
             Toast.makeText(mActivity, mActivity.getString(R.string.data_fetched), Toast.LENGTH_SHORT).show();
             mActivity.updateView();
         } else {

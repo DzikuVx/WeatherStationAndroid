@@ -11,8 +11,8 @@ import java.util.ArrayList;
 
 public class ReadoutValuesListAdapter extends BaseAdapter {
 
-    private Context ctx;
-    private ArrayList<ReadoutValue> data;
+    final private Context ctx;
+    final private ArrayList<ReadoutValue> data;
 
     public ReadoutValuesListAdapter(Context ctx, ArrayList<ReadoutValue> data) {
         this.data = data;

@@ -13,10 +13,10 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ForecastListAdapter extends BaseAdapter {
+class ForecastListAdapter extends BaseAdapter {
 
-    private Context ctx;
-    private ArrayList<DayForecastSimple> data;
+    final private Context ctx;
+    final private ArrayList<DayForecastSimple> data;
 
     public ForecastListAdapter(Context ctx, ArrayList<DayForecastSimple> data) {
         this.data = data;

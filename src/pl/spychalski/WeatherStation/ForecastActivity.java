@@ -7,23 +7,6 @@ import android.widget.TextView;
 
 public class ForecastActivity extends MyActionBarActivity {
 
-    DayForecastSimple weatherData;
-
-    TextView date;
-    TextView dayOfWeek;
-    TextView dayTemperature;
-    TextView nightTemperature;
-    TextView pressure;
-    TextView humidity;
-    TextView clouds;
-    TextView rain;
-    TextView rainHeader;
-    TextView snow;
-    TextView snowHeader;
-    TextView windSpeed;
-    TextView windDirection;
-    ImageView weatherIcon;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -32,22 +15,22 @@ public class ForecastActivity extends MyActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.forecast);
 
-        weatherData = (DayForecastSimple) getIntent().getExtras().getSerializable("forecastData");
+        DayForecastSimple weatherData = (DayForecastSimple) getIntent().getExtras().getSerializable("forecastData");
 
-        date = (TextView) findViewById(R.id.date);
-        dayOfWeek = (TextView) findViewById(R.id.dayOfWeek);
-        weatherIcon = (ImageView) findViewById(R.id.weatherIcon);
-        dayTemperature = (TextView) findViewById(R.id.dayTemperature);
-        nightTemperature = (TextView) findViewById(R.id.nightTemperature);
-        pressure = (TextView) findViewById(R.id.pressure);
-        humidity = (TextView) findViewById(R.id.humidity);
-        clouds = (TextView) findViewById(R.id.clouds);
-        rain = (TextView) findViewById(R.id.rain);
-        rainHeader = (TextView) findViewById(R.id.rainHeader);
-        snow = (TextView) findViewById(R.id.snow);
-        snowHeader = (TextView) findViewById(R.id.snowHeader);
-        windDirection = (TextView) findViewById(R.id.windDirection);
-        windSpeed = (TextView) findViewById(R.id.windSpeed);
+        TextView date = (TextView) findViewById(R.id.date);
+        TextView dayOfWeek = (TextView) findViewById(R.id.dayOfWeek);
+        ImageView weatherIcon = (ImageView) findViewById(R.id.weatherIcon);
+        TextView dayTemperature = (TextView) findViewById(R.id.dayTemperature);
+        TextView nightTemperature = (TextView) findViewById(R.id.nightTemperature);
+        TextView pressure = (TextView) findViewById(R.id.pressure);
+        TextView humidity = (TextView) findViewById(R.id.humidity);
+        TextView clouds = (TextView) findViewById(R.id.clouds);
+        TextView rain = (TextView) findViewById(R.id.rain);
+        TextView rainHeader = (TextView) findViewById(R.id.rainHeader);
+        TextView snow = (TextView) findViewById(R.id.snow);
+        TextView snowHeader = (TextView) findViewById(R.id.snowHeader);
+        TextView windDirection = (TextView) findViewById(R.id.windDirection);
+        TextView windSpeed = (TextView) findViewById(R.id.windSpeed);
 
         date.setText(weatherData.getDate());
         dayOfWeek.setText(weatherData.getTranslatedDayOfWeek(this));

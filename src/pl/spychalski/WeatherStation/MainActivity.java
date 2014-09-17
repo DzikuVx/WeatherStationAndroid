@@ -9,7 +9,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.*;
+import android.widget.AbsListView;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,29 +29,27 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
     public static final String LAST_READOUT_KEY = "lastReadout";
     public static final String LAST_READOUT_TIMESTAMP_KEY = "lastReadoutTimestamp";
 
+    @SuppressWarnings("UnusedDeclaration")
     public static final String DEBUG_TAG = "Debug";
 
-    TextView currentTemperature;
-    TextView maxTemperature;
-    TextView minTemperature;
-    ImageView currentWeatherIcon;
-    TextView currentHumidity;
-    TextView currentPressure;
-    TextView windSpeed;
-    TextView windDirection;
-    TextView cloudCoverage;
-    TextView lastReadout;
+    private TextView currentTemperature;
+    private TextView maxTemperature;
+    private TextView minTemperature;
+    private ImageView currentWeatherIcon;
+    private TextView currentHumidity;
+    private TextView currentPressure;
+    private TextView windSpeed;
+    private TextView windDirection;
+    private TextView cloudCoverage;
 
-    TextView rainValue;
-    TextView rainHeader;
-    TextView snowValue;
-    TextView snowHeader;
+    private TextView rainValue;
+    private TextView rainHeader;
+    private TextView snowValue;
+    private TextView snowHeader;
 
-    ListView dataList;
+    private ListView dataList;
 
     SwipeRefreshLayout swipeLayout;
-
-    Button button;
 
     private class DataResult {
         public JSONObject json = null;
@@ -229,10 +232,12 @@ public class MainActivity extends MyActionBarActivity implements View.OnClickLis
             }
         });
 
-        button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(this);
+        Button button = (Button) findViewById(R.id.button);
+        if (button != null) {
+            button.setOnClickListener(this);
+        }
 
-        lastReadout = (TextView) findViewById(R.id.lastReadout);
+        TextView lastReadout = (TextView) findViewById(R.id.lastReadout);
         if (lastReadout != null) {
             SharedPreferences weatherData = getApplicationContext().getSharedPreferences(SHARED_PREFERENCE_NAME, 0);
             Long lLastReadout = weatherData.getLong(LAST_READOUT_TIMESTAMP_KEY, 0);
